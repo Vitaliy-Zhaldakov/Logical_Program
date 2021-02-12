@@ -1,0 +1,2 @@
+uncle(X,Y) :- parent(Z,Y),brother(X,Z).
+uncles(X) :- uncle(Y,X),write(Y),nl,fail.
