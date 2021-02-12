@@ -1,0 +1,2 @@
+son(X,Y) :- parent(Y,X),man(X).
+son(X) :- son(Y,X),write(Y).
