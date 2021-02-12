@@ -1,0 +1,2 @@
+mother(X,Y) :- parent(X,Y),woman(X).
+mother(X) :- mother(Y,X),write(Y).
