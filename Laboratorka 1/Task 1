@@ -41,3 +41,7 @@ parent(vladislav,julia).
 parent(victoria,maria).
 parent(victoria,alexander).
 parent(victoria,julia).
+
+
+man():-man(X),write(X),nl,fail.
+woman() :-woman(X),write(X),nl,fail.
