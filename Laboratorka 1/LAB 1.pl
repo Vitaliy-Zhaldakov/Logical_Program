@@ -63,3 +63,6 @@ b_s(X) :- b_s(Y,X),write(Y),nl,fail.
 
 grand_pa(X,Y) :- parent(Z,Y),parent(X,Z),man(X).
 grand_pas(X) :- grand_pa(Y,X),write(Y),nl,fail.
+
+grand_so(X,Y) :- parent(Z,X),parent(Y,Z),man(X).
+grand_sons(X) :- grand_so(Y,X),write(Y),nl,fail.
