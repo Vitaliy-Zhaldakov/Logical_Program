@@ -1,2 +1,0 @@
-brother(X,Y) :- mother(Z,X),mother(Z,Y),man(X),X\=Y.
-brothers(X) :- brother(Y,X),write(Y),nl,fail.
