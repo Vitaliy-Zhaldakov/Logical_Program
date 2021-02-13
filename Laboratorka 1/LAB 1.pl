@@ -72,3 +72,6 @@ grand_pa_and_son(X,Y) :- grand_pa(Y,X),grand_so(X,Y).
 
 grand_pa_and_da(X,Y) :- grand_pa(X,Y),parent(Z,Y),parent(X,Z),woman(Y).
 grand_pa_and_da(X,Y) :- grand_pa(Y,X),parent(Z,X),parent(Y,Z),woman(X).
+
+uncle(X,Y) :- parent(Z,Y),brother(X,Z).
+uncles(X) :- uncle(Y,X),write(Y),nl,fail.
