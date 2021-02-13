@@ -1,2 +1,0 @@
-husband(X,Y) :- parent(X,Z),parent(Y,Z),man(X),X\=Y.
-husband(X) :- husband(Y,X),write(Y).
