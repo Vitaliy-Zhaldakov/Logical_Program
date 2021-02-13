@@ -57,3 +57,6 @@ brothers(X) :- brother(Y,X),write(Y),nl,fail.
 
 husband(X,Y) :- parent(X,Z),parent(Y,Z),man(X),X\=Y.
 husband(X) :- husband(Y,X),write(Y).
+
+b_s(X,Y) :- mother(Z,X),mother(Z,Y),X\=Y.
+b_s(X) :- b_s(Y,X),write(Y),nl,fail.
