@@ -1,2 +1,0 @@
-grand_pa_and_da(X,Y) :- grand_pa(X,Y),parent(Z,Y),parent(X,Z),woman(Y).
-grand_pa_and_da(X,Y) :- grand_pa(Y,X),parent(Z,X),parent(Y,Z),woman(X).
