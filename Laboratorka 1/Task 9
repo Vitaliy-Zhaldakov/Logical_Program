@@ -1,2 +1,0 @@
-grand_so(X,Y) :- parent(Z,X),parent(Y,Z),man(X).
-grand_sons(X) :- grand_so(Y,X),write(Y),nl,fail.
