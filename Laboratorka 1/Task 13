@@ -1,2 +1,0 @@
-niece(X,Y) :- uncle(Y,X),woman(X).
-nieces(X) :- niece(Y,X),write(Y),nl,fail.
