@@ -19,4 +19,9 @@ fib_down(X,_,1,X):-!.
 fib_down(I1,I2,N,X):- N1 is N-1, N2 is I1 + I2,fib_down(I2,N2,N1,X).
 
 sum_up(0,0):-!.
-sum_up(N,X):- N1 is N div 10, sum(N1,X1), X is X1 + N mod 10.
+sum_up(N,X):- N1 is N div 10, sum_up(N1,X1), X is X1 + N mod 10.
+
+sum_down(N,X):- sum_down(N,0,X).
+sum_down(0,X,X):-!.
+sum_down(N,S,X):- N1 is N mod 10, N2 is N div 10, S1 is S + N1,
+    sum_down(N2,S1,X).
