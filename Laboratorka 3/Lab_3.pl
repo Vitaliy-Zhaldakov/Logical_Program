@@ -40,3 +40,8 @@ min_nechet_up(N,X):- N1 is N div 10, min_nechet_up(N1,Min1),
     N2 is N mod 10, ((N2 < Min1, 0 \= N2 mod 2) -> X = N2 ;
                   X = Min1).
 
+min_nechet_down(N,X):- min_nechet_down(N,10,X).
+min_nechet_down(0,X,X):-!.
+min_nechet_down(N,Curr_min,X):- N1 is N mod 10, N2 is N div 10,
+    (   (N1 < Curr_min, 0 \= N1 mod 2) -> Min1 = N1 ; Min1 = Curr_min),
+    min_nechet_down(N2,Min1,X).
