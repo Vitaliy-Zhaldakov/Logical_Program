@@ -25,3 +25,7 @@ sum_down(N,X):- sum_down(N,0,X).
 sum_down(0,X,X):-!.
 sum_down(N,S,X):- N1 is N mod 10, N2 is N div 10, S1 is S + N1,
     sum_down(N2,S1,X).
+
+max_num_up(0,0):-!.
+max_num_up(N,Max):- N1 is N div 10, max_num_up(N1,Max1), N2 is N mod 10,
+    (   N2 > Max1 -> Max = N2 ; Max = Max1).
