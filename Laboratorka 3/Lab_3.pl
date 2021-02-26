@@ -35,3 +35,8 @@ max_num_down(0,Max,Max):-!.
 max_num_down(N,Curr_max,Max):- N1 is N mod 10, N2 is N div 10,
     (   N1 > Curr_max -> Max1 = N1 ; Max1 = Curr_max), max_num_down(N2,Max1,Max).
 
+min_nechet_up(0,10):-!.
+min_nechet_up(N,X):- N1 is N div 10, min_nechet_up(N1,Min1),
+    N2 is N mod 10, ((N2 < Min1, 0 \= N2 mod 2) -> X = N2 ;
+                  X = Min1).
+
