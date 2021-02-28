@@ -60,3 +60,10 @@ is_simple(X,I):- X1 is X mod I, X1 \= 0, I1 is I + 1, is_simple(X,I1).
 kol_del(N,Count):- kol_del(N,N,Count).
 kol_del(1,_,1):-!.
 kol_del(I,N,Count):- I1 is I - 1, kol_del(I1,N,C),(0 is N mod I -> Count is C + 1 ;Count is C).
+
+% 259 - самая длинная цепочка(999999)
+kolatc(N,Kolvo):- kolatc(N,1,Kolvo).
+kolatc(1,I,I):-!.
+kolatc(N,I,Kolvo):- 0 is N mod 2 -> (I1 is I + 1, N1 is N div 2,
+    kolatc(N1,I1,Kolvo)) ; (I1 is I + 1, N1 is (3 * N + 1),
+                              kolatc(N1,I1,Kolvo)).
