@@ -67,3 +67,8 @@ kolatc(1,I,I):-!.
 kolatc(N,I,Kolvo):- 0 is N mod 2 -> (I1 is I + 1, N1 is N div 2,
     kolatc(N1,I1,Kolvo)) ; (I1 is I + 1, N1 is (3 * N + 1),
                               kolatc(N1,I1,Kolvo)).
+
+kolvo_del_up(N,X):- kolvo_del_up(N,N,X).
+kolvo_del_up(_,1,1):-!.
+kolvo_del_up(N,I,X):- I1 is I - 1, kolvo_del_up(N,I1,X1),
+    (   (0 is N mod I, N1 is I mod 3, N1\=0) -> X is X1 + 1 ; X = X1).
