@@ -24,3 +24,7 @@ proga_num_elem :- write("Введите число элементов: "), read(N), read_list(N,List)
     write("Введите позицию элемента: "), read(Number), nl,
     list_el_numb(List,Elem,Number), write("Элемент: "), write(Elem),!.
 proga_num_elem :- write("Такого номера нет").
+
+min_list_up([],-1):-!.
+min_list_up([H|T],Min):- min_list_up(T,Min1),(Min1 = -1 -> Min = H ; (H < Min1
+     -> Min = H ; Min = Min1)).
