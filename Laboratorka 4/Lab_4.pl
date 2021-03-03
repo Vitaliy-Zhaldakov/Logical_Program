@@ -39,3 +39,7 @@ proga_min :- write("Введите число элементов: "), read(N), read_list(N,List),
 
 in_list([El|_],El):-!.
 in_list([_|T],El):- in_list(T,El).
+
+reverse_list(List,Revl):- reverse_list(List,[],Revl).
+reverse_list([],Revl,Revl):-!.
+reverse_list([H|T],T1,Revl):- reverse_list(T,[H|T1],Revl).
