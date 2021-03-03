@@ -8,3 +8,6 @@ sum_list_down([],Sum,Sum):-!.
 sum_list_down([H|T],S,Sum):- S1 is S + H, sum_list_down(T,S1,Sum).
 proga_summ :- write("Введите число элементов: "), read(N), read_list(N,List),
     sum_list_down(List,Sum), write("Сумма элементов: "), write(Sum).
+
+sum_list_up([],0):-!.
+sum_list_up([H|T],Sum):- sum_list_up(T,S1), Sum is H + S1.
