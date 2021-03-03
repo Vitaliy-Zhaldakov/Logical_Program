@@ -33,3 +33,6 @@ min_list_down(List,Min):- min_list_down(List,-1,Min).
 min_list_down([],Min,Min):-!.
 min_list_down([H|T],M,Min):- (M = -1 -> M1 = H ; (H < M -> M1 = H ; M1 = M)),
     min_list_down(T,M1,Min).
+
+proga_min :- write("Введите число элементов: "), read(N), read_list(N,List),
+    min_list_up(List,Min), write("Минимальный элемент: "), write(Min).
