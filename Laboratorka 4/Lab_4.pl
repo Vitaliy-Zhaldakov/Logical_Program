@@ -28,3 +28,8 @@ proga_num_elem :- write("Такого номера нет").
 min_list_up([],-1):-!.
 min_list_up([H|T],Min):- min_list_up(T,Min1),(Min1 = -1 -> Min = H ; (H < Min1
      -> Min = H ; Min = Min1)).
+
+min_list_down(List,Min):- min_list_down(List,-1,Min).
+min_list_down([],Min,Min):-!.
+min_list_down([H|T],M,Min):- (M = -1 -> M1 = H ; (H < M -> M1 = H ; M1 = M)),
+    min_list_down(T,M1,Min).
