@@ -54,3 +54,9 @@ delete_elem([H|T],Number, I,[H|T1]):- I1 is I + 1, delete_elem(T,Number,I1,T1).
 delete_all([], _, []):-!.
 delete_all([Elem|T], Elem, List):- delete_all(T, Elem, List),!.
 delete_all([H|T], Elem,[H|List]):- delete_all(T, Elem, List).
+
+check_elem([H|T]):- check_elem(H,T), check_elem(T).
+check_elem([]):-!.
+check_elem(_,[]):-!.
+check_elem(Elem,[H|T]):- Elem \= H, check_elem(Elem,T).
+
