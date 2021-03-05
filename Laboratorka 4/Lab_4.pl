@@ -43,3 +43,6 @@ in_list([_|T],El):- in_list(T,El).
 reverse_list(List,Revl):- reverse_list(List,[],Revl).
 reverse_list([],Revl,Revl):-!.
 reverse_list([H|T],T1,Revl):- reverse_list(T,[H|T1],Revl).
+
+p([],_):-!.
+p([SubH|SubT],[H|T]):- H = SubH -> p(SubT,T) ; p([SubH|SubT],T).
