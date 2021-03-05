@@ -69,3 +69,6 @@ unique_elem([H|T],Out) :- elem(H,T), unique_elem(T,Out).
 count_elem([], _, 0):-!.
 count_elem([H|T], H, Count) :- count_elem(T, H, Count1), Count is Count1 + 1,!.
 count_elem([_|T], Elem, Count) :-count_elem(T, Elem, Count1), Count is Count1 + 0.
+
+length_list([],0):-!.
+length_list([_|T],Length):- length_list(T,Length1),Length is Length1 + 1.
