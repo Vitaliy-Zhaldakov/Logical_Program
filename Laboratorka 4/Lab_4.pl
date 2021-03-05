@@ -60,3 +60,8 @@ check_elem([]):-!.
 check_elem(_,[]):-!.
 check_elem(Elem,[H|T]):- Elem \= H, check_elem(Elem,T).
 
+elem(X,[X|_]):-!.
+elem(X,[_|T]):- elem(X,T).
+unique_elem([],[]).
+unique_elem([H|T],[H|Out]):- not(elem(H,T)),unique_elem(T,Out),!.
+unique_elem([H|T],Out) :- elem(H,T), unique_elem(T,Out).
