@@ -61,12 +61,19 @@ kol_del(N,Count):- kol_del(N,N,Count).
 kol_del(1,_,1):-!.
 kol_del(I,N,Count):- I1 is I - 1, kol_del(I1,N,C),(0 is N mod I -> Count is C + 1 ;Count is C).
 
-% 259 - самая длинная цепочка(999999)
-kolatc(N,Kolvo):- kolatc(N,1,Kolvo).
-kolatc(1,I,I):-!.
-kolatc(N,I,Kolvo):- 0 is N mod 2 -> (I1 is I + 1, N1 is N div 2,
-    kolatc(N1,I1,Kolvo)) ; (I1 is I + 1, N1 is (3 * N + 1),
-                              kolatc(N1,I1,Kolvo)).
+kolatc(Number):-kolatc(1,1,1,Number).
+kolatc(1000000,I,_,I):-!.
+kolatc(Number,I,Max_I,Max_N):- New_number is Number+1,
+    kolatc_length(New_number,1,Lenght),(Lenght > Max_I ->
+    kolatc(New_number,New_number,Lenght,Max_N);
+    kolatc(New_number,I,Max_I,Max_N)).
+
+kolatc_length(1,Result,Result):-!.
+kolatc_length(Number,Lenght,Result):- Lenght1 is Lenght + 1,
+    (Number mod 2 =:= 0 -> New_Number is Number / 2,
+     kolatc_length(New_Number,Lenght1,Result) ; New_Number is (Number*3+1),
+     kolatc_length(New_Number,Lenght1,Result)).
+
 
 kolvo_del_up(N,X):- kolvo_del_up(N,N,X).
 kolvo_del_up(_,1,1):-!.
@@ -77,3 +84,13 @@ kolvo_del_down(N,X):- kolvo_del_down(N,N,0,X).
 kolvo_del_down(_,0,X,X):-!.
 kolvo_del_down(N,I,P,X):- ((0 is N mod I, N1 is I mod 3, N1\=0)->
     P1 is P + 1 ; P1 = P),I1 is I - 1, kolvo_del_down(N,I1,P1,X).
+
+mult_up(0,1):-!.
+mult_up(N,Mult):- N1 is N div 10, mult_up(N1,Mult1), Mult is Mult1 * (N mod 10).
+
+sum_del(N,sum):- sum_del(N,N,0,sum).
+sum_del(_,0,sum,sum):-!.
+sum_del(N,I,sum1,sum):- sum_down(N,S), mult_up(N,M),
+    (0 is N mod I, nod(S,I,Nod1),Nod1 = 1, nod(M,I,Nod), Nod \= 1) ->
+    (sum2 is sum1 + I, I1 is I - 1,sum_del(N,I1,sum2,sum)) ;
+    (I1 is I - 1,sum_del(N,I1,sum1,sum)).
