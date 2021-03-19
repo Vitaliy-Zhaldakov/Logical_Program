@@ -18,8 +18,8 @@ r_str(X,A,B,N,K):- K1 is K+1 ,append(B,[X],B1),get0(X1), r_str(X1,A,B1,N,K1).
 in_list([El|_],El).
 in_list([_|T],El):- in_list(T,El).
 
-in_list_exСЃlude([El|T],El,T).
-in_list_exСЃlude([H|T],El,[H|Tail]):- in_list_exСЃlude(T,El,Tail).
+in_list_exсlude([El|T],El,T).
+in_list_exсlude([H|T],El,[H|Tail]):- in_list_exсlude(T,El,Tail).
 
 
 reverse_list(A,Z) :- reverse_list(A,Z,[]).
@@ -40,7 +40,13 @@ remove_from_list([IH|IT], Elem, TempLeft, Result) :-
 	remove_from_list(IT, Elem, [IH|TempLeft], Result).
 
 
-%Task 1 Р”Р°РЅР° СЃС‚СЂРѕРєР°. Р’С‹РІРµСЃС‚Рё 3 СЂР°Р·Р° С‡РµСЂРµР· Р·Р°РїСЏС‚СѓСЋ Рё РїРѕСЃС‡РёС‚Р°С‚СЊ СЃРёРјРІРѕР»С‹
-three_times :- write("Р’РІРµРґРёС‚Рµ СЃС‚СЂРѕРєСѓ:"),nl, read_str(Str,Number), write_str(Str),
+%Task 1 Дана строка. Вывести 3 раза через запятую и посчитать символы
+three_times :- write("Введите строку:"),nl, read_str(Str,Number), write_str(Str),
 write(', '),write_str(Str), write(', '), write_str(Str), nl,
-write("Р§РёСЃР»Рѕ СЃРёРјРІРѕР»РѕРІ: "), write(Number).
+write("Число символов: "), write(Number).
+
+%Task 2 Дана строка. Найти количество слов
+number_words(Words):- get0(X), n_words(X,Words,1).
+n_words(10,Words,Words):-!.
+n_words(32,Words,N):- N1 is N + 1, get0(X1), n_words(X1,Words,N1),!.
+n_words(_,Words,N):- get0(X1), n_words(X1,Words,N).
