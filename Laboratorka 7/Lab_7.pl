@@ -104,3 +104,16 @@ el_by_number([],_,_,nil):-!.
 el_by_number([El|_],Ind,Ind,El):-!.
 el_by_number([_|T],I,Ind,El):-I1 is I+1, el_by_number(T,I1,Ind,El).
 
+%Task 4. Дана строка. Вывести первые три символа и последние три
+%символа, если длина строки больше 5. Иначе вывести первый символ
+%столько раз, какова длина строки.
+saint_three :- read_str(Str,N), (N > 5 -> three(Str) ; first(Str,N)).
+
+three(Str):- three(Str,0).
+three(_,7):-!.
+three(Str,3):- reverse_list(Str,Str1), three(Str1,4),!.
+three([H|T],I):- put(H), I1 is I + 1, three(T,I1).
+
+first([H|_], N) :- first(H,N,0).
+first(_,N,N):- !.
+first(H,N,I):- put(H), I1 is I + 1, first(H,N,I1).
