@@ -117,3 +117,16 @@ three([H|T],I):- put(H), I1 is I + 1, three(T,I1).
 first([H|_], N) :- first(H,N,0).
 first(_,N,N):- !.
 first(H,N,I):- put(H), I1 is I + 1, first(H,N,I1).
+
+%Task 5. Дана строка. Показать номера символов, совпадающих с последним
+%символом строки.
+
+numbers_of_last :- read_str(Str,_),last_symbol(Str,El), list_el_numb(Str,El,0).
+%Вывод номеров символов, совпадающих с данным
+list_el_numb([],_,_):- !.
+list_el_numb([H|_],H,Number):- write(Number),write(" "),fail.
+list_el_numb([_|T],Elem,Number):- N1 is Number + 1, list_el_numb(T,Elem,N1).
+
+%Получение последнего символа строки
+last_symbol(Str,El):- reverse_list(Str,Str1), last_symbol(Str1,El,0).
+last_symbol([H|_],H,0):- !.
