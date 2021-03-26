@@ -182,3 +182,11 @@ longer(L1,L2,R,S):- R is L2 - L1, S = -2,!.
 %¬ывод строки заданное количество раз
 writed(_,0):-!.
 writed(Str,R):- write_str(Str), nl, R1 is R - 1, writed(Str,R1).
+
+%Task 10. ƒана строка. ≈сли она начинаетс€ на 'abc', то заменить их на 'www',
+%иначе добавить в конец строки 'zzz'.
+zamena :- read_str(Str,_), replace(Str).
+
+replace([H1,H2,H3|T]):- ((H1 = 97, H2 = 98, H3 = 99) ->
+       (   append([119,119,119],T,New_str), write_str(New_str)) ;
+       (   append([H1,H2,H3|T],[122,122,122],New_str), write_str(New_str))).
