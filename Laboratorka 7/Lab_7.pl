@@ -156,7 +156,6 @@ after_null([_|[]],S2,S2):- !.
 
 %Task 8. Дана строка. Определите, какой символ в ней встречается раньше: 'x'
 % или 'w'. Если какого-то из символов нет, вывести сообщение об этом.
-% 120 119
 x_or_w :- read_str(Str,_), check(Str,0,0,X,W), (X = 0 -> (write("'x' is out"),!) ;
     (W = 0 -> (write("'w' is out"),!) ; earlier(Str))).
 
@@ -169,3 +168,17 @@ check([H|T],X,W,N1,N2):- (H = 120 -> (X1 is X + 1, check(T,X1,W,N1,N2))) ;
 %Определение первого вхождения одного из данных символов
 earlier([H|T]):- (H = 120 -> (write("'x' is earlier"),!) ; (H = 119 ->
 			     (write("'w' is earlier"),!)) ; earlier(T)).
+
+%Task 9. Даны две строки. Вывести большую по длине строку столько раз, на
+%сколько символов отличаются строки.
+long_length :- write("Insert first string: "), read_str(Str1,L1),
+	write("Insert second string: "), read_str(Str2,L2), longer(L1,L2,R,S),
+	(   S = -1 -> writed(Str1,R) ; writed(Str2,R)).
+
+%Определение разницы между длинами строк
+longer(L1,L2,R,S):- L1 > L2, R is L1 - L2, S = -1,!.
+longer(L1,L2,R,S):- R is L2 - L1, S = -2,!.
+
+%Вывод строки заданное количество раз
+writed(_,0):-!.
+writed(Str,R):- write_str(Str), nl, R1 is R - 1, writed(Str,R1).
