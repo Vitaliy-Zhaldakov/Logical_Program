@@ -137,3 +137,17 @@ list_el_three([],_):- !.
 list_el_three([_|T],0):- list_el_three(T,1),!.
 list_el_three([H|T],Number):- (0 is Number mod 3 -> (put(H), write(" "),
 N1 is Number + 1, list_el_three(T,N1)) ; (N1 is Number + 1, list_el_three(T,N1))).
+
+%Task 7. Дана строка. Определите общее количество символов '+' и '-' в ней. А
+%также сколько таких символов, после которых следует цифра ноль.
+plus_minus :- read_str(Str,_), symbols(Str,0,S1), after_null(Str,0,S2),
+      write("Plus or minus: "), write(S1), nl, write("Plus or minus then null: "),
+      write(S2).
+
+symbols([],S1,S1):- !.
+symbols([H|T],N1,S1):- ((H = 43 ; H = 45) -> (N is N1 + 1, symbols(T,N,S1)) ;
+	symbols(T,N1,S1)).
+
+after_null([H1,H2|T],N2,S2):- (((H1 = 43 ; H1 = 45), H2 = 48) -> (N is N2 + 1,
+	after_null(T,N,S2)) ; after_null([H2|T],N2,S2)),!.
+after_null([_|[]],S2,S2):- !.
