@@ -144,10 +144,28 @@ plus_minus :- read_str(Str,_), symbols(Str,0,S1), after_null(Str,0,S2),
       write("Plus or minus: "), write(S1), nl, write("Plus or minus then null: "),
       write(S2).
 
+%Подсчёт символов "+" и "-"
 symbols([],S1,S1):- !.
 symbols([H|T],N1,S1):- ((H = 43 ; H = 45) -> (N is N1 + 1, symbols(T,N,S1)) ;
 	symbols(T,N1,S1)).
 
+%Подсчёт ситуаций, когда после символа идёт нуль
 after_null([H1,H2|T],N2,S2):- (((H1 = 43 ; H1 = 45), H2 = 48) -> (N is N2 + 1,
 	after_null(T,N,S2)) ; after_null([H2|T],N2,S2)),!.
 after_null([_|[]],S2,S2):- !.
+
+%Task 8. Дана строка. Определите, какой символ в ней встречается раньше: 'x'
+% или 'w'. Если какого-то из символов нет, вывести сообщение об этом.
+% 120 119
+x_or_w :- read_str(Str,_), check(Str,0,0,X,W), (X = 0 -> (write("'x' is out"),!) ;
+    (W = 0 -> (write("'w' is out"),!) ; earlier(Str))).
+
+%Проверка, имеются ли данные символы в строке
+check([],X,W,X,W):- !.
+check([H|T],X,W,N1,N2):- (H = 120 -> (X1 is X + 1, check(T,X1,W,N1,N2))) ;
+		   (H = 119 -> (W1 is W + 1, check(T,X,W1,N1,N2)) ;
+		   check(T,X,W,N1,N2)).
+
+%Определение первого вхождения одного из данных символов
+earlier([H|T]):- (H = 120 -> (write("'x' is earlier"),!) ; (H = 119 ->
+			     (write("'w' is earlier"),!)) ; earlier(T)).
