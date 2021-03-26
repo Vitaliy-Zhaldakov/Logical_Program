@@ -190,3 +190,16 @@ zamena :- read_str(Str,_), replace(Str).
 replace([H1,H2,H3|T]):- ((H1 = 97, H2 = 98, H3 = 99) ->
        (   append([119,119,119],T,New_str), write_str(New_str)) ;
        (   append([H1,H2,H3|T],[122,122,122],New_str), write_str(New_str))).
+
+%Task 11. Дана строка. Если ее длина больше 10, то оставить в строке только
+%первые 6 символов, иначе дополнить строку символами 'o' до длины 12.
+dozen :- read_str(Str,L), (L > 10 -> first_six(Str,0,[]) ; up_to_dozen(Str,L)).
+
+%Оставляет в строке первые 6 символов
+first_six([H|T],N,Str):- append(Str,[H],Rstr), N1 is N + 1,first_six(T,N1,Rstr),!.
+first_six(_,6,Str):- write_str(Str),!.
+
+%Дополняет строку 'o' до длины 12
+up_to_dozen(Rstr,12):- write_str(Rstr),!.
+up_to_dozen(Str,L):- append(Str, [111], Rstr), L1 is L + 1, up_to_dozen(Rstr,L1).
+
