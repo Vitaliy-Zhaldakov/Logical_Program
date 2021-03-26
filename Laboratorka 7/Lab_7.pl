@@ -120,7 +120,6 @@ first(H,N,I):- put(H), I1 is I + 1, first(H,N,I1).
 
 %Task 5. Дана строка. Показать номера символов, совпадающих с последним
 %символом строки.
-
 numbers_of_last :- read_str(Str,_),last_symbol(Str,El), list_el_numb(Str,El,0).
 %Вывод номеров символов, совпадающих с данным
 list_el_numb([],_,_):- !.
@@ -130,3 +129,11 @@ list_el_numb([_|T],Elem,Number):- N1 is Number + 1, list_el_numb(T,Elem,N1).
 %Получение последнего символа строки
 last_symbol(Str,El):- reverse_list(Str,Str1), last_symbol(Str1,El,0).
 last_symbol([H|_],H,0):- !.
+
+%Task 6. Дана строка. Показать третий, шестой, девятый и так далее символы.
+plus_three :- read_str(Str,_), list_el_three(Str,0).
+
+list_el_three([],_):- !.
+list_el_three([_|T],0):- list_el_three(T,1),!.
+list_el_three([H|T],Number):- (0 is Number mod 3 -> (put(H), write(" "),
+N1 is Number + 1, list_el_three(T,N1)) ; (N1 is Number + 1, list_el_three(T,N1))).
