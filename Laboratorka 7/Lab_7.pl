@@ -250,3 +250,10 @@ number_numbers :- read_str(Str,_), cifra(Str,0,N), write(N).
 cifra([],R,R):- !.
 cifra([H|T],N,R):- (contains([48,49,50,51,52,53,54,55,56,57],H) -> (N1 is N + 1,
 		  cifra(T,N1,R)); cifra(T,N,R)).
+
+%Task 15. Дана строка. Определить, содержит ли строка только символы 'a', 'b',
+%'c' или нет.
+a_b_c :- read_str(Str,_), contains(Str).
+
+contains([]):-!.
+contains([H|T]):- contains([97,98,99],H), contains(T).
