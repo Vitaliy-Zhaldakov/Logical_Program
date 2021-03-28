@@ -298,3 +298,21 @@ in_stroka([_,_],R,R):-!.
 in_stroka([],R,R):-!.
 in_stroka([H1,H2,H3|T],N,R):- ((H1 = 97, H2 = 98, H3 = 97) -> (N1 is N + 1,
 	  in_stroka(T,N1,R)); in_stroka([H2,H3|T],N,R)).
+
+%Task 20. Удалить в строке все лишние пробелы, то есть серии подряд идущих
+%пробелов заменить на одиночные пробелы. Крайние пробелы в строке
+%удалить.
+delete_space :- read_str(Str,_), delete_space(Str,_,[],Rstr),
+	delete_space(Rstr,[],R), write_str(R).
+
+%Удаление лишней последовательности пробелов
+delete_space([],_,R,R):-!.
+delete_space([H|T],Last,Rstr,R):- (H = 32 -> (Last = 32 -> (Last1 = H,
+       delete_space(T,Last1,Rstr,R)); (append(Rstr,[H],Rstr1), Last1 = H,
+	delete_space(T,Last1,Rstr1,R))); (append(Rstr,[H],Rstr1), Last1 = H,
+	  delete_space(T,Last1,Rstr1,R))).
+%Удаление крайних пробелов в строке.
+delete_space([],R,R):-!.
+delete_space([32],R,R):-!.
+delete_space([H|T],Rstr,R):- ((Rstr = [],H = 32) -> delete_space(T,Rstr,R) ;
+	     (	 append(Rstr,[H],Rstr1), delete_space(T,Rstr1,R))).
