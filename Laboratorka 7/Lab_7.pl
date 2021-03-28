@@ -19,8 +19,8 @@ r_str(10,A,A,N,N):-!.
 r_str(X,A,B,N,K):- K1 is K+1 ,append(B,[X],B1),get0(X1), r_str(X1,A,B1,N,K1).
 
 %Удаление элемента из списка in_list_exclude(+List, +El, -List1)
-in_list_exсlude([El|T],El,T).
-in_list_exсlude([H|T],El,[H|Tail]):- in_list_exсlude(T,El,Tail).
+in_list_exlude([El|T],El,T).
+in_list_exlude([H|T],El,[H|Tail]):- in_list_exlude(T,El,Tail).
 
 %Переворот списка reverse_list(+List, -Reverse)
 reverse_list(A,Z) :- reverse_list(A,Z,[]).
@@ -202,4 +202,35 @@ first_six(_,6,Str):- write_str(Str),!.
 %Дополняет строку 'o' до длины 12
 up_to_dozen(Rstr,12):- write_str(Rstr),!.
 up_to_dozen(Str,L):- append(Str, [111], Rstr), L1 is L + 1, up_to_dozen(Rstr,L1).
+
+%Task 12. Дана строка. Разделить строку на фрагменты по три подряд идущих
+%символа. В каждом фрагменте средний символ заменить на случайный
+%символ, не совпадающий ни с одним из символов этого фрагмента.
+%Показать фрагменты, упорядоченные по алфавиту.
+fragments :- read_str(Str,N), N1 is N div 3, create_frags(Str,N1,Frags),
+	zam_middle(Frags,RFrags), order_frags(RFrags).
+
+%Разделение строки на фрагменты заданной длины create_frags(+Str,+N,-List)
+create_frags(_,0,[]):- !.
+create_frags([H1,H2,H3|T1],N1,[H|T]):- N is N1 - 1,create_frags(T1,N,T),
+	H = [H1,H2,H3],!.
+
+%Замена среднего символа на случайный
+zam_middle([],[]):- !.
+zam_middle([H|T],[H1|T1]):- zam_middle(T,T1), zam_middle(H,3,R), H1 = R.
+zam_middle([],0,[]):- !.
+zam_middle([H|T],N,[H1|T1]):- N1 is N - 1, zam_middle(T,N1,T1), (N = 2 ->
+	   H1 is random(256) ; H1 = H).
+
+%Нахождение минимального элемента списка
+min_list_up([],0):-!.
+min_list_up([H|T],Min):- min_list_up(T,Min1),(Min1 = 0 -> Min = H ; (H < Min1
+     -> Min = H ; Min = Min1)).
+
+%Вывод фрагментов по алфавиту
+order_frags([]):- !.
+order_frags([H|T]):- order(H), order_frags(T).
+order([]):- write(" "),!.
+order(List):- min_list_up(List,Min), put(Min), in_list_exlude(List,Min,List1),
+	order(List1),!.
 
