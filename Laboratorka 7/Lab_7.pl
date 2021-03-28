@@ -326,3 +326,19 @@ words :- write("Insert first string: "),read_str(Str1,_),
 words([],_,R,R):-!.
 words([H|T],Symbols,Rstr,R):- (contains(Symbols,H) -> (append(Rstr,[32],Rstr1),
     words(T,Symbols,Rstr1,R)); (append(Rstr,[H],Rstr1),words(T,Symbols,Rstr1,R))).
+
+%Task 22. Дана строка. Вывести первый, последний и средний (если он есть)
+%символы
+symbols :- read_str(Str,N), N1 is N div 2,symbols(Str,0,0,First,Last),
+	(0 is N mod 2 -> (write("First: "), put(First),nl, write("Last: "),
+	 put(Last)); (middle(Str,N1,0,Middle), write("First: "), put(First),nl,
+	   write("Last: "), put(Last), nl, write("Middle "), put(Middle))).
+
+%Поиск первого и последнего символа
+symbols([],F,L,F,L):-!.
+symbols([H],F,_,First,Last):- symbols([],F,H,First,Last),!.
+symbols([H|T],0,L,First,Last):-	symbols(T,H,L,First,Last),!.
+symbols([_|T],F,L,First,Last):- symbols(T,F,L,First,Last).
+%Поиск среднего символа
+middle([H|_],N,N,H):-!.
+middle([_|T],N,N1,Middle):- N2 is N1 + 1, middle(T,N,N2,Middle).
