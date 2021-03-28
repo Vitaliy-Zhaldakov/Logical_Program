@@ -268,3 +268,14 @@ zamena([],R,R):-!.
 zamena([H1,H2,H3,H4|T],Rstr,R):- ((H1 = 119, H2 = 111, H3 = 114, H4 = 100) ->
       (	  append(Rstr,[108,101,116,116,101,114],Rstr1), zamena(T,Rstr1,R)) ;
       (   append(Rstr,[H1],Rstr1), zamena([H2,H3,H4|T],Rstr1,R))).
+
+%Task 17. Удалите в строке все буквы 'x'. за которыми следует 'abc'.
+delete_x :- read_str(Str,_), delete_x(Str,[],R), write_str(R).
+
+delete_x([H4],Str,R):- append(Str,[H4],R),!.
+delete_x([H3,H4],Str,R):- append(Str,[H3,H4],R),!.
+delete_x([H2,H3,H4],Str,R):- append(Str,[H2,H3,H4],R),!.
+delete_x([],R,R):-!.
+delete_x([H1,H2,H3,H4|T],Str,R):- ((H1 = 120, H2 = 97, H3 = 98, H4 = 99) ->
+	 (   append(Str,[97,98,99],Rstr), delete_x(T,Rstr,R));
+	 (   append(Str,[H1],Rstr), delete_x([H2,H3,H4|T],Rstr,R))).
