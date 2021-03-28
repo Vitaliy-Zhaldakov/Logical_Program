@@ -279,3 +279,13 @@ delete_x([],R,R):-!.
 delete_x([H1,H2,H3,H4|T],Str,R):- ((H1 = 120, H2 = 97, H3 = 98, H4 = 99) ->
 	 (   append(Str,[97,98,99],Rstr), delete_x(T,Rstr,R));
 	 (   append(Str,[H1],Rstr), delete_x([H2,H3,H4|T],Rstr,R))).
+
+%Task 18. Удалите в строке все 'abc', за которыми следует цифра.
+delete_abc :- read_str(Str,_), delete_abc(Str,[],R), write_str(R).
+
+delete_abc([H4],Str,R):- append(Str,[H4],R),!.
+delete_abc([H3,H4],Str,R):- append(Str,[H3,H4],R),!.
+delete_abc([H2,H3,H4],Str,R):- append(Str,[H2,H3,H4],R),!.
+delete_abc([],R,R):-!.
+delete_abc([H1,H2,H3,H4|T],Str,R):- ((H1 = 97, H2 = 98, H3 = 99, H4 > 47, H4 < 58) ->(   append(Str,[H4],Rstr), delete_abc(T,Rstr,R));
+	 (   append(Str,[H1],Rstr), delete_abc([H2,H3,H4|T],Rstr,R))).
