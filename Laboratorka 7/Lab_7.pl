@@ -316,3 +316,13 @@ delete_space([],R,R):-!.
 delete_space([32],R,R):-!.
 delete_space([H|T],Rstr,R):- ((Rstr = [],H = 32) -> delete_space(T,Rstr,R) ;
 	     (	 append(Rstr,[H],Rstr1), delete_space(T,Rstr1,R))).
+
+%Task 21. ƒана строка, состо€ща€ из слов, разделенных символами, которые
+%перечислены во второй строке. ѕоказать все слова
+words :- write("Insert first string: "),read_str(Str1,_),
+	write("Insert second string: "),read_str(Str2,_),words(Str1,Str2,[],Rstr),
+	write("Words: "), nl, write_str(Rstr).
+
+words([],_,R,R):-!.
+words([H|T],Symbols,Rstr,R):- (contains(Symbols,H) -> (append(Rstr,[32],Rstr1),
+    words(T,Symbols,Rstr1,R)); (append(Rstr,[H],Rstr1),words(T,Symbols,Rstr1,R))).
