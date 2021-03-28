@@ -234,3 +234,12 @@ order([]):- write(" "),!.
 order(List):- min_list_up(List,Min), put(Min), in_list_exlude(List,Min,List1),
 	order(List1),!.
 
+%Task 13. Дана строка. Заменить каждый четный символ или на 'a', если символ
+%не равен 'a' или 'b', или на 'c' в противном случае.
+zamena_chet :- read_str(Str,_),replace_chet(Str,0,[],Rstr), write_str(Rstr).
+
+replace_chet([],_,Rstr,Rstr):-!.
+replace_chet([H|T],N,Rstr,R):- (0 is N mod 2 -> ((H \= 97, H \= 98) ->
+       (   append(Rstr,[97],Rstr1), N1 is N + 1, replace_chet(T,N1,Rstr1,R)) ;
+       (   append(Rstr,[99],Rstr1), N1 is N + 1, replace_chet(T,N1,Rstr1,R)));
+	   append(Rstr,[H],Rstr1), N1 is N + 1, replace_chet(T,N1,Rstr1,R)).
