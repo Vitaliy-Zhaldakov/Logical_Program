@@ -289,3 +289,12 @@ delete_abc([H2,H3,H4],Str,R):- append(Str,[H2,H3,H4],R),!.
 delete_abc([],R,R):-!.
 delete_abc([H1,H2,H3,H4|T],Str,R):- ((H1 = 97, H2 = 98, H3 = 99, H4 > 47, H4 < 58) ->(   append(Str,[H4],Rstr), delete_abc(T,Rstr,R));
 	 (   append(Str,[H1],Rstr), delete_abc([H2,H3,H4|T],Rstr,R))).
+
+%Task 19. Найдите количество вхождения 'aba' в строку.
+in_stroka :- read_str(Str,_), in_stroka(Str,0,N), write(N).
+
+in_stroka([_],R,R):-!.
+in_stroka([_,_],R,R):-!.
+in_stroka([],R,R):-!.
+in_stroka([H1,H2,H3|T],N,R):- ((H1 = 97, H2 = 98, H3 = 97) -> (N1 is N + 1,
+	  in_stroka(T,N1,R)); in_stroka([H2,H3|T],N,R)).
