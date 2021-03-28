@@ -257,3 +257,14 @@ a_b_c :- read_str(Str,_), contains(Str).
 
 contains([]):-!.
 contains([H|T]):- contains([97,98,99],H), contains(T).
+
+%Task 16. Замените в строке все вхождения 'word' на 'letter'.
+letter :- read_str(Str,_), zamena(Str,[],Rstr), write_str(Rstr).
+
+zamena([H2],Rstr,R) :- append(Rstr,[H2],R),!.
+zamena([H2,H3],Rstr,R):- append(Rstr,[H2,H3],R),!.
+zamena([H2,H3,H4],Rstr,R) :- append(Rstr,[H2,H3,H4],R),!.
+zamena([],R,R):-!.
+zamena([H1,H2,H3,H4|T],Rstr,R):- ((H1 = 119, H2 = 111, H3 = 114, H4 = 100) ->
+      (	  append(Rstr,[108,101,116,116,101,114],Rstr1), zamena(T,Rstr1,R)) ;
+      (   append(Rstr,[H1],Rstr1), zamena([H2,H3,H4|T],Rstr1,R))).
