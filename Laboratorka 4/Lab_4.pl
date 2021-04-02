@@ -43,14 +43,14 @@ proga_num_elem :- write("Введите число элементов: "), read(
 proga_num_elem :- write("Такого номера нет").
 
 %Task 6 Поиск минимального элемента в списке рекурсией вверх; min_list_up(+List, ?Min)
-min_list_up([],-1):-!.
-min_list_up([H|T],Min):- min_list_up(T,Min1),(Min1 = -1 -> Min = H ; (H < Min1
+min_list_up([],0):-!.
+min_list_up([H|T],Min):- min_list_up(T,Min1),(Min1 = 0 -> Min = H ; (H < Min1
      -> Min = H ; Min = Min1)).
 
 %Task 7 Поиск минимального элемента в списке рекурсией вниз; min_list_down(+List, ?Min)
-min_list_down(List,Min):- min_list_down(List,-1,Min).
+min_list_down(List,Min):- min_list_down(List,0,Min).
 min_list_down([],Min,Min):-!.
-min_list_down([H|T],M,Min):- (M = -1 -> M1 = H ; (H < M -> M1 = H ; M1 = M)),
+min_list_down([H|T],M,Min):- (M = 0 -> M1 = H ; (H < M -> M1 = H ; M1 = M)),
     min_list_down(T,M1,Min).
 
 %Task 8 Программа читает список, находит и выводит на экран его минимальный элемент
@@ -87,11 +87,8 @@ check_elem(_,[]):-!.
 check_elem(Elem,[H|T]):- Elem \= H, check_elem(Elem,T).
 
 %Task 15 Построение нового списка без повторяющихся элементов; unique_elem(+List, -Out)
-elem(X,[X|_]):-!.
-elem(X,[_|T]):- elem(X,T).
-unique_elem([],[]).
-unique_elem([H|T],[H|Out]):- not(elem(H,T)),unique_elem(T,Out),!.
-unique_elem([H|T],Out) :- elem(H,T), unique_elem(T,Out).
+unique_elem([],[]):-!.
+unique_elem([H|T],[H|List]):- delete_all(T,H,List1), unique_elem(List1,List).
 
 %Task 16 Количество раз, которое элемент встречается в списке; count_elem(+List, +Elem, -Count)
 count_elem([], _, 0):-!.
