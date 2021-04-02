@@ -1,5 +1,5 @@
 character(luke_skywalker,0).
-character(c-зpo,1).
+character(c-Р·po,1).
 character(r2-d2,1).
 character(princess_leia,0).
 character(yoda,2).
@@ -25,7 +25,7 @@ character(admiral_akbar,2).
 character(mandalorian,0).
 
 side(luke_skywalker,1).
-side(c-зpo,1).
+side(c-Р·po,1).
 side(r2-d2,1).
 side(princess_leia,1).
 side(yoda,1).
@@ -48,17 +48,17 @@ side(grand_moff_tarkin,0).
 side(ahsoka_tano,1).
 side(mace_windu,1).
 side(admiral_akbar,1).
-side(mandalorian,1).
+side(mandalorian,2).
 
 class(luke_skywalker,1).
-class(c-зpo,5).
+class(c-Р·po,5).
 class(r2-d2,5).
 class(princess_leia,2).
 class(yoda,1).
 class(darth_vader,0).
 class(darth_sidious,0).
 class(padme_amidalla,4).
-class(han_solo,2).
+class(han_solo,5).
 class(anakin_skywalker,1).
 class(obi-wan_kenobi,1).
 class(rey,1).
@@ -77,7 +77,7 @@ class(admiral_akbar,2).
 class(mandalorian,3).
 
 power_ownership(luke_skywalker,1).
-power_ownership(c-зpo,0).
+power_ownership(c-Р·po,0).
 power_ownership(r2-d2,0).
 power_ownership(princess_leia,0).
 power_ownership(yoda,1).
@@ -103,7 +103,7 @@ power_ownership(admiral_akbar,0).
 power_ownership(mandalorian,0).
 
 possession_of_weapons(luke_skywalker,1).
-possession_of_weapons(c-зpo,0).
+possession_of_weapons(c-Р·po,0).
 possession_of_weapons(r2-d2,0).
 possession_of_weapons(princess_leia,2).
 possession_of_weapons(yoda,1).
@@ -128,8 +128,8 @@ possession_of_weapons(mace_windu,1).
 possession_of_weapons(admiral_akbar,0).
 possession_of_weapons(mandalorian,2).
 
-color_of_sword(luke_skywalker,1).
-color_of_sword(c-зpo,3).
+color_of_sword(luke_skywalker,0).
+color_of_sword(c-Р·po,3).
 color_of_sword(r2-d2,3).
 color_of_sword(princess_leia,3).
 color_of_sword(yoda,1).
@@ -155,7 +155,7 @@ color_of_sword(admiral_akbar,3).
 color_of_sword(mandalorian,3).
 
 number_of_swords(luke_skywalker,1).
-number_of_swords(c-зpo,0).
+number_of_swords(c-Р·po,0).
 number_of_swords(r2-d2,0).
 number_of_swords(princess_leia,0).
 number_of_swords(yoda,1).
@@ -181,7 +181,7 @@ number_of_swords(admiral_akbar,0).
 number_of_swords(mandalorian,0).
 
 padawan(luke_skywalker,3).
-padawan(c-зpo,0).
+padawan(c-Р·po,0).
 padawan(r2-d2,0).
 padawan(princess_leia,0).
 padawan(yoda,2).
@@ -207,7 +207,7 @@ padawan(admiral_akbar,0).
 padawan(mandalorian,0).
 
 betrayer(luke_skywalker,0).
-betrayer(c-зpo,0).
+betrayer(c-Р·po,0).
 betrayer(r2-d2,0).
 betrayer(princess_leia,0).
 betrayer(yoda,0).
@@ -233,7 +233,7 @@ betrayer(admiral_akbar,0).
 betrayer(mandalorian,0).
 
 translate(luke_skywalker,0).
-translate(c-зpo,1).
+translate(c-Р·po,1).
 translate(r2-d2,0).
 translate(princess_leia,0).
 translate(yoda,0).
@@ -259,7 +259,7 @@ translate(admiral_akbar,0).
 translate(mandalorian,0).
 
 special_color(luke_skywalker,0).
-special_color(c-зpo,0).
+special_color(c-Р·po,0).
 special_color(r2-d2,1).
 special_color(princess_leia,0).
 special_color(yoda,0).
@@ -284,79 +284,112 @@ special_color(mace_windu,0).
 special_color(admiral_akbar,0).
 special_color(mandalorian,1).
 
+starship(luke_skywalker,1).
+starship(c-Р·po,0).
+starship(r2-d2,0).
+starship(princess_leia,0).
+starship(yoda,0).
+starship(darth_vader,1).
+starship(darth_sidious,0).
+starship(padme_amidalla,0).
+starship(han_solo,1).
+starship(anakin_skywalker,1).
+starship(obi-wan_kenobi,1).
+starship(rey,1).
+starship(darth_maul,0).
+starship(boba_fett,1).
+starship(jango_fett,1).
+starship(general_grievous,0).
+starship(ja-ja_binks,0).
+starship(chewbacca,1).
+starship(finn,0).
+starship(moff_gideon,0).
+starship(grand_moff_tarkin,0).
+starship(ahsoka_tano,0).
+starship(mace_windu,0).
+starship(admiral_akbar,0).
+starship(mandalorian,1).
 
-question1(X1):- write("Кем является ваш персонаж?"),nl,
-    write("2. Существо"),nl,
-    write("1. Дроид"),nl,
-    write("0. Человек"),nl,
+
+question1(X1):- write("РљРµРј СЏРІР»СЏРµС‚СЃСЏ РІР°С€ РїРµСЂСЃРѕРЅР°Р¶?"),nl,
+    write("2. РЎСѓС‰РµСЃС‚РІРѕ"),nl,
+    write("1. Р”СЂРѕРёРґ"),nl,
+    write("0. Р§РµР»РѕРІРµРє"),nl,
     read(X1).
 
-question2(X2):- write("На какой стороне ваш персонаж?"),nl,
-    write("1. Светлой"),nl,
-    write("0. Тёмной"),nl,
+question2(X2):- write("РќР° РєР°РєРѕР№ СЃС‚РѕСЂРѕРЅРµ РІР°С€ РїРµСЂСЃРѕРЅР°Р¶?"),nl,
+    write("2. РќРµР№С‚СЂР°Р»СЊРЅРѕР№"),nl,
+    write("1. РЎРІРµС‚Р»РѕР№"),nl,
+    write("0. РўС‘РјРЅРѕР№"),nl,
     read(X2).
 
-question3(X3):- write("К какому классу, из перечисленных, относится ваш персонаж?"),nl,
-    write("5. Другие"),nl,
-    write("4. Клоны"),nl,
-    write("3. Охотники за головами"),nl,
-    write("2. Повстанцы"),nl,
-    write("1. Джедаи"),nl,
-    write("0. Ситхи"),nl,
+question3(X3):- write("Рљ РєР°РєРѕРјСѓ РєР»Р°СЃСЃСѓ, РёР· РїРµСЂРµС‡РёСЃР»РµРЅРЅС‹С…, РѕС‚РЅРѕСЃРёС‚СЃСЏ РІР°С€ РїРµСЂСЃРѕРЅР°Р¶?"),nl,
+    write("5. Р”СЂСѓРіРёРµ"),nl,
+    write("4. РљР»РѕРЅС‹"),nl,
+    write("3. РћС…РѕС‚РЅРёРєРё Р·Р° РіРѕР»РѕРІР°РјРё"),nl,
+    write("2. РџРѕРІСЃС‚Р°РЅС†С‹"),nl,
+    write("1. Р”Р¶РµРґР°Рё"),nl,
+    write("0. РЎРёС‚С…Рё"),nl,
     read(X3).
 
-question4(X4):- write("Управляет ли ваш персонаж силой?"),nl,
-    write("1. Да"),nl,
-    write("0. Нет"),nl,
+question4(X4):- write("РЈРїСЂР°РІР»СЏРµС‚ Р»Рё РІР°С€ РїРµСЂСЃРѕРЅР°Р¶ СЃРёР»РѕР№?"),nl,
+    write("1. Р”Р°"),nl,
+    write("0. РќРµС‚"),nl,
     read(X4).
 
-question5(X5):- write("Владеет ли ваш персонаж орудием?"),nl,
-    write("2. Бластером"),nl,
-    write("1. Мечом"),nl,
-    write("0. Нет"),nl,
+question5(X5):- write("Р’Р»Р°РґРµРµС‚ Р»Рё РІР°С€ РїРµСЂСЃРѕРЅР°Р¶ РѕСЂСѓРґРёРµРј?"),nl,
+    write("2. Р‘Р»Р°СЃС‚РµСЂРѕРј"),nl,
+    write("1. РњРµС‡РѕРј"),nl,
+    write("0. РќРµС‚"),nl,
     read(X5).
 
-question6(X6):- write("Каким цветом светового меча обладает ваш персонаж?"),nl,
-    write("3. Другой"),nl,
-    write("2. Красный"),nl,
-    write("1. Зелёный"),nl,
-    write("0. Синий"),nl,
+question6(X6):- write("РљР°РєРёРј С†РІРµС‚РѕРј СЃРІРµС‚РѕРІРѕРіРѕ РјРµС‡Р° РѕР±Р»Р°РґР°РµС‚ РІР°С€ РїРµСЂСЃРѕРЅР°Р¶?"),nl,
+    write("3. Р”СЂСѓРіРѕР№"),nl,
+    write("2. РљСЂР°СЃРЅС‹Р№"),nl,
+    write("1. Р—РµР»С‘РЅС‹Р№"),nl,
+    write("0. РЎРёРЅРёР№"),nl,
     read(X6).
 
-question7(X7):- write("Сколькими световыми мечами владеет ваш персонаж?"),nl,
-    write("2. Больше одного"),nl,
-    write("1. Одним"),nl,
-    write("0. Ни одним"),nl,
+question7(X7):- write("РЎРєРѕР»СЊРєРёРјРё СЃРІРµС‚РѕРІС‹РјРё РјРµС‡Р°РјРё РІР»Р°РґРµРµС‚ РІР°С€ РїРµСЂСЃРѕРЅР°Р¶?"),nl,
+    write("2. Р‘РѕР»СЊС€Рµ РѕРґРЅРѕРіРѕ"),nl,
+    write("1. РћРґРЅРёРј"),nl,
+    write("0. РќРё РѕРґРЅРёРј"),nl,
     read(X7).
 
-question8(X8):- write("Ваш персонаж падаван или магистр?"),nl,
-    write("3. Оба варианта"),nl,
-    write("2. Магистр"),nl,
-    write("1. Падаван"),nl,
-    write("0. Никто"),nl,
+question8(X8):- write("Р’Р°С€ РїРµСЂСЃРѕРЅР°Р¶ РїР°РґР°РІР°РЅ РёР»Рё РјР°РіРёСЃС‚СЂ?"),nl,
+    write("3. РћР±Р° РІР°СЂРёР°РЅС‚Р°"),nl,
+    write("2. РњР°РіРёСЃС‚СЂ"),nl,
+    write("1. РџР°РґР°РІР°РЅ"),nl,
+    write("0. РќРёРєС‚Рѕ"),nl,
     read(X8).
 
-question9(X9):- write("Является ли ваш персонаж предателем?"),nl,
-    write("1. Да"),nl,
-    write("0. Нет"),nl,
+question9(X9):- write("РЇРІР»СЏРµС‚СЃСЏ Р»Рё РІР°С€ РїРµСЂСЃРѕРЅР°Р¶ РїСЂРµРґР°С‚РµР»РµРј?"),nl,
+    write("1. Р”Р°"),nl,
+    write("0. РќРµС‚"),nl,
     read(X9).
 
-question10(X10):- write("Ваш персонаж владеет многими языками?"),nl,
-    write("1. Да"),nl,
-    write("0. Нет"),nl,
+question10(X10):- write("Р’Р°С€ РїРµСЂСЃРѕРЅР°Р¶ РІР»Р°РґРµРµС‚ РјРЅРѕРіРёРјРё СЏР·С‹РєР°РјРё?"),nl,
+    write("1. Р”Р°"),nl,
+    write("0. РќРµС‚"),nl,
     read(X10).
 
-question11(X11):- write("Во внешности вашего персонажа преобладают следующие цвета?"),nl,
-    write("2. Оранжевый"),nl,
-    write("1. Синий"),nl,
-    write("0. Не преобладают"),nl,
+question11(X11):- write("Р’Рѕ РІРЅРµС€РЅРѕСЃС‚Рё РІР°С€РµРіРѕ РїРµСЂСЃРѕРЅР°Р¶Р° РїСЂРµРѕР±Р»Р°РґР°СЋС‚ СЃР»РµРґСѓСЋС‰РёРµ С†РІРµС‚Р°?"),nl,
+    write("2. РћСЂР°РЅР¶РµРІС‹Р№"),nl,
+    write("1. РЎРёРЅРёР№"),nl,
+    write("0. РќРµ РїСЂРµРѕР±Р»Р°РґР°СЋС‚"),nl,
     read(X11).
+
+question12(X12):- write("РЈРїСЂР°РІР»СЏРµС‚ Р»Рё РІР°С€ РїРµСЂСЃРѕРЅР°Р¶ Р·РІРµР·РґРѕР»С‘С‚РѕРј?"),nl,
+    write("1. Р”Р°"),nl,
+    write("0. РќРµС‚"),nl,
+    read(X12).
 
 play :- question1(X1),question2(X2),question3(X3),question4(X4),
     question5(X5),question6(X6),question7(X7),question8(X8),
-    question9(X9),question10(X10),question11(X11),
+    question9(X9),question10(X10),question11(X11),question12(X12),
     character(X,X1),side(X,X2),class(X,X3),power_ownership(X,X4),possession_of_weapons(X,X5),color_of_sword(X,X6),number_of_swords(X,X7),padawan(X,X8),
-   betrayer(X,X9),translate(X,X10),special_color(X,X11),
+   betrayer(X,X9),translate(X,X10),special_color(X,X11),starship(X,X12),
     write(X).
+
 
 
