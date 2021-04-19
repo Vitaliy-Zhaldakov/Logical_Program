@@ -132,10 +132,10 @@ contains([], _):- !, fail.
 contains([H|_], H):- !.
 contains([_|T], N):- contains(T, N).
 
-%Номер минимального элемента списка
+%Номер максимального элемента списка
 indOfMax(X,Y):-indexOfMin(X,Y).
 indexOfMin([], -1):- !.
-indexOfMin([H|T], X):-indexOfMin(T, 1, 1, X, H).
+indexOfMin([H|T], X):-indexOfMin(T, 0, 1, X, H).
 indexOfMin([], _, MinInd, MinInd, _):-!.
 indexOfMin([H|T], CurInd, _, X, CurMin):-
 	H > CurMin, NewCurInd is CurInd + 1,
@@ -218,3 +218,51 @@ p([SubH|SubT],[H|T]):- H = SubH -> p(SubT,T) ; p([SubH|SubT],T).
 reverse_list(List,Revl):- reverse_list(List,[],Revl).
 reverse_list([],Revl,Revl):-!.
 reverse_list([H|T],T1,Revl):- reverse_list(T,[H|T1],Revl).
+
+%Task 2.14 Дана строка в которой записаны слова через пробел. Необходимо
+%упорядочить слова по количеству букв в каждом слове.
+sort_words:- see('x:/Stroki_read.txt'), read_list_str_mod(Words,Lengths), seen,
+	sorting(Words,Lengths,[],Sort_list), write_list_str_mod(Sort_list).
+
+% Находим номер меньшей длины, находим меньшую длину, удаляем из списка
+% длин, по номеру меньшей длины находим слово, кидаем в результирующий
+% список, добавляем пробел
+sorting([],[],Sort_list,Sort_list):-!.
+sorting(Words,Lengths,List,R):- numOfMin(Lengths,Num),
+	el_by_number(Lengths,Num,El), del_elem(El,Lengths,Rlength),
+	 el_by_number(Words,Num,Word), append(List,[Word],Rlist),
+	  del_elem(Word,Words,Rwords), sorting(Rwords,Rlength,Rlist,R).
+
+%Ввод слова
+read_str_mod(A,N,Flag):- get0(X),r_str_mod(X,A,[],N,0,Flag).
+r_str_mod(-1,A,A,N,N,1):-!.
+r_str_mod(32,A,A,N,N,0):-!.
+r_str_mod(X,A,B,N,K,Flag):-K1 is K+1,append(B,[X],B1),get0(X1),
+    r_str_mod(X1,A,B1,N,K1,Flag).
+
+%Ввод списка слов и списка длин слов
+read_list_str_mod(List, LengthList):- read_str_mod(A,N,Flag),
+    read_list_str_mod([A],List,[N],LengthList,Flag).
+read_list_str_mod(List,List,LengthList, LengthList,1):-!.
+read_list_str_mod(Cur_list,List,CurLengthList,LengthList,0):-
+     read_str_mod(A,N,Flag), append(Cur_list,[A],C_l),
+       append(CurLengthList, [N], NewLengthList),
+        read_list_str_mod(C_l,List,NewLengthList,LengthList,Flag).
+
+%Номер минимального элемента списка
+numOfMin([], -1):- !.
+numOfMin([H|T], X):-numOfMin(T, 0, 0, X, H).
+numOfMin([], _, MinInd, MinInd, _):-!.
+numOfMin([H|T], CurInd, _, X, CurMin):-
+	H < CurMin, NewCurInd is CurInd + 1,
+	  numOfMin(T, NewCurInd, NewCurInd, X, H), !.
+numOfMin([_|T], CurInd, MinInd, X, CurMin):-
+	NewCurInd is CurInd + 1, numOfMin(T, NewCurInd, MinInd, X, CurMin).
+
+%Вывод слов
+write_list_str_mod([]):-!.
+write_list_str_mod([H|T]):- write_str_mod(H),put(32),write_list_str_mod(T).
+
+%Вывод слова
+write_str_mod([]):-!.
+write_str_mod([H|T]):- put(H), write_str_mod(T).
