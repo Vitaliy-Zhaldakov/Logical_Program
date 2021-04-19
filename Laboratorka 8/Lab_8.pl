@@ -199,3 +199,22 @@ delete_from_str([],_,[],_):-!.
 delete_from_str([H|T],H,Rstr,0):- delete_from_str(T,H,Rstr,1),!.
 delete_from_str([H1|T],H,[H1|Rstr],0):- H \= H1, delete_from_str(T,H,Rstr,0),!.
 delete_from_str([H1|T],H,[H1|Rstr],1):- delete_from_str(T,H,Rstr,1),!.
+
+%Task 2.7  Дана строка, состоящая из символов латиницы. Необходимо проверить,
+%образуют ли прописные символы этой строки палиндром (зеркальное слово)
+palindrom:- see('x:/Stroki_read.txt'), read_str(Str,_), seen,
+	big_letters(Str,List), reverse_list(Str,Rstr), p(List,Rstr).
+
+%Формирование списка прописных символов
+big_letters([],[]):-!.
+big_letters([H|T],[H|List]):- H > 64, H < 91, big_letters(T,List),!.
+big_letters([_|T],List):- big_letters(T,List),!.
+
+%Проверка, содержит ли список данный подсписок; p(+Sublist,+List)
+p([],_):-!.
+p([SubH|SubT],[H|T]):- H = SubH -> p(SubT,T) ; p([SubH|SubT],T).
+
+%Переворот списка; reverse_list(+List, -Revl)
+reverse_list(List,Revl):- reverse_list(List,[],Revl).
+reverse_list([],Revl,Revl):-!.
+reverse_list([H|T],T1,Revl):- reverse_list(T,[H|T1],Revl).
