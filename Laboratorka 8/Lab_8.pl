@@ -337,5 +337,20 @@ maxDigit_row([_|T],Cur_max,Last_max):- (Cur_max > Last_max ->
 
 %Task 5 Прочитать список строк из файла. Упорядочить по длине строки
 sort_list_str:- see('x:/Stroki_read.txt'), read_list_str(List,LengthList),seen,
-%Предикат sorting(+List,+Lengths,+Sort,-Sort_List) из задания 2.14
-	sorting(List,LengthList,[],Sort_List),write_list_str(Sort_List).
+%Предикат sorting(+List,+Lengths,+Sort,-Sort_list) из задания 2.14
+	sorting(List,LengthList,[],Sort_list),write_list_str(Sort_list).
+
+%Task 6 Дан список строк из файла. Упорядочить по количеству слов в строке
+sort_on_words:- see('x:/Stroki_read.txt'), read_list_str(List),seen,
+	words_list(List,[],Words_list), sorting(List,Words_list,[],Sort_list),
+	 write_list_str(Sort_list).
+
+%Формирование списка числа слов в строках words_list(+List,+Words,-Words_list)
+words_list([],Words_list,Words_list):-!.
+words_list([H|T],Words,Words_list):- num_words(H,1,Num),
+	append(Words,[Num],Words1), words_list(T,Words1,Words_list).
+
+%Подсчёт количества слов в строке
+num_words([],Num,Num):-!.
+num_words([32|T],I,Num):- I1 is I + 1, num_words(T,I1,Num),!.
+num_words([_|T],I,Num):- num_words(T,I,Num).
