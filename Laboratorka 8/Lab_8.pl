@@ -266,3 +266,35 @@ write_list_str_mod([H|T]):- write_str_mod(H),put(32),write_list_str_mod(T).
 %Вывод слова
 write_str_mod([]):-!.
 write_str_mod([H|T]):- put(H), write_str_mod(T).
+
+%Task 3 Дана строка. Необходимо найти все даты, которые описаны в
+%виде "31 февраля 2007"
+date:- see('x:/Stroki_read.txt'), read_str(A,_), seen, append(A,[32],A1),
+	date_time(A1).
+
+date_time([]):-!.
+date_time([32|T]):- date_time(T),!.
+date_time([H|T]):- (day([H|T],[],Day,Day_Left)->
+  (month(Day_Left,[],Month,Month_Left)-> (year(Month_Left,[],Year,Year_Left)->
+    name(D,Day),write(D),write(" "), name(M,Month),write(M),
+      write(" "), name(Y,Year),write(Y),nl,
+      date_time(Year_Left); date_time(Month_Left)); date_time(Day_Left));
+	 date_time(T)).
+
+%Поиск числа дня day(+Str,+I,-Day,-Day_Left)
+day([32|T],Day,Day,T):-!.
+day([H|T],I,Day,Day_Left):- H >=48, H =<57, append(I,[H],I1),
+    day(T,I1,Day,Day_Left),!.
+day([_|_],_,_,_):-!,false.
+
+%Поиск месяца month(+Str,+I,-Month,-Month_Left)
+month([32|T],Month,Month,T):-!.
+month([H|T],I,Month,Month_Left):- H >= 97, H =< 122, append(I,[H],I1),
+    month(T,I1,Month,Month_Left),!.
+month([_|_],_,_,_):-!,false.
+
+%Поиск года year(+Str,+I,-Year,-Year_Left)
+year([32|T],Year,Year,T):-!.
+year([H|T],I,Year,Year_Left):- H >= 48,H =< 57,append(I,[H],I1),
+    year(T,I1,Year,Year_Left),!.
+year([_|_],_,_,_):-!,false.
