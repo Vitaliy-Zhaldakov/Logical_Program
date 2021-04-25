@@ -301,8 +301,7 @@ year([_|_],_,_,_):-!,false.
 
 %Task 4.5 Дана строка. Необходимо найти наибольшее количество идущих
 %подряд символов кириллицы
-max_in_row :- see('x:/Stroki_read.txt'), read_str(A,_), seen,
-    max_row(A).
+max_in_row :- see('x:/Stroki_read.txt'), read_str(A,_), seen, max_row(A).
 
 %Поиск наибольшего количества идущих подряд символов кириллицы
 max_row(A):- max_row(A,0,0),!.
@@ -312,4 +311,14 @@ max_row([H|T],Cur_max,Last_max):- (H > 64, H < 91);(H > 96, H < 123),
       Cur_max1 is Cur_max + 1, max_row(T,Cur_max1,Last_max),!.
 max_row([_|T],Cur_max,Last_max):- (Cur_max > Last_max ->
 	 max_row(T,0,Cur_max); max_row(T,0,Last_max)),!.
+
+%Task 4.7 Дана строка. Необходимо найти минимальное из имеющихся в ней
+%натуральных чисел
+min_natural:- see('x:/Stroki_read.txt'), read_str(A,_), seen,
+	min_natural(A,58,Min), put(Min).
+
+min_natural([],Min,Min):-!.
+min_natural([H|T],Cur_min,Min):- H > 48, H < 58, H < Cur_min,
+	min_natural(T,H,Min),!.
+min_natural([_|T],Cur_min,Min):- min_natural(T,Cur_min,Min),!.
 
