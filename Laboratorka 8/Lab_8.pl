@@ -335,3 +335,7 @@ maxDigit_row([H|T],Cur_max,Last_max):- H > 47, H < 58, Cur_max1 is Cur_max + 1,
 maxDigit_row([_|T],Cur_max,Last_max):- (Cur_max > Last_max ->
 	 maxDigit_row(T,0,Cur_max); maxDigit_row(T,0,Last_max)),!.
 
+%Task 5 Прочитать список строк из файла. Упорядочить по длине строки
+sort_list_str:- see('x:/Stroki_read.txt'), read_list_str(List,LengthList),seen,
+%Предикат sorting(+List,+Lengths,+Sort,-Sort_List) из задания 2.14
+	sorting(List,LengthList,[],Sort_List),write_list_str(Sort_List).
