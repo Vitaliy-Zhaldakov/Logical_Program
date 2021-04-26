@@ -354,3 +354,26 @@ words_list([H|T],Words,Words_list):- num_words(H,1,Num),
 num_words([],Num,Num):-!.
 num_words([32|T],I,Num):- I1 is I + 1, num_words(T,I1,Num),!.
 num_words([_|T],I,Num):- num_words(T,I,Num).
+
+%Task 7 Дан список строк из файла. Упорядочить по количеству слов
+%идущих после чисел
+sort_words_after_digits:- see('x:/Stroki_read.txt'),read_list_str(List), seen,
+      list_word_after_digit(List,[],List_Word),
+        sorting(List,List_Word,[],Sort_list), write_list_str(Sort_list).
+
+%Формирование списка числа слов после цифр в строке
+list_word_after_digit([],R,R):-!.
+list_word_after_digit([H|T],I,R):- get_words(H,Words),
+    count_words_after_digit(Words,0,Count_Words),append(I,[Count_Words],I1),
+      list_word_after_digit(T,I1,R).
+
+%Подсчёт числа слов после цифр в строке
+count_words_after_digit([_],Count_Words,Count_Words):-!.
+count_words_after_digit([H|T],I,Count_Words):- kolvo_digit(H,0,Digits),
+	(Digits > 0 -> I1 is I+1, count_words_after_digit(T,I1,Count_Words);
+	   count_words_after_digit(T,I,Count_Words)).
+
+%Подсчёт числа цифр в слове
+kolvo_digit([],Kolvo,Kolvo):-!.
+kolvo_digit([H|T],I,Kolvo):- (H >= 48, H =< 57) -> I1 is I+1,
+	kolvo_digit(T,I1,Kolvo); kolvo_digit(T,I,Kolvo).
