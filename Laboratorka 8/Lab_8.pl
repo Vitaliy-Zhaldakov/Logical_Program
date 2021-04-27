@@ -1,4 +1,4 @@
-%Ââîä ñòðîêè
+%Ð’Ð²Ð¾Ð´ ÑÑ‚Ñ€Ð¾ÐºÐ¸
 read_str(A,N,Flag):-get0(X),r_str(X,A,[],N,0,Flag).
 r_str(-1,A,A,N,N,1):-!.
 r_str(10,A,A,N,N,0):-!.
@@ -11,17 +11,17 @@ r_str(10,A,A,Length,Length):-!.
 r_str(X,A,B,Length,N):- N1 is N + 1, append(B,[X],B1), get0(X1),
 	r_str(X1,A,B1,Length,N1).
 
-%Âûâîä ñòðîêè
+%Ð’Ñ‹Ð²Ð¾Ð´ ÑÑ‚Ñ€Ð¾ÐºÐ¸
 write_str([]):-!.
 write_str([H|T]):- put(H), write_str(T).
 
-%Ââîä ñïèñêà ñòðîê
+%Ð’Ð²Ð¾Ð´ ÑÐ¿Ð¸ÑÐºÐ° ÑÑ‚Ñ€Ð¾Ðº
 read_list_str(List):- read_str(A,_,Flag),read_list_str([A],List,Flag).
 read_list_str(List,List,1):-!.
 read_list_str(Cur_list,List,0):-
 	read_str(A,_,Flag),append(Cur_list,[A],C_l),read_list_str(C_l,List,Flag).
 
-%Ââîä ñïèñêà ñòðîê è ôîðìèðîâàíèå ñïèñêà äëèí ñòðîê
+%Ð’Ð²Ð¾Ð´ ÑÐ¿Ð¸ÑÐºÐ° ÑÑ‚Ñ€Ð¾Ðº Ð¸ Ñ„Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÐ¿Ð¸ÑÐºÐ° Ð´Ð»Ð¸Ð½ ÑÑ‚Ñ€Ð¾Ðº
 read_list_str(List, LengthList):- read_str(A,N,Flag),
     read_list_str([A],List,[N],LengthList,Flag).
 read_list_str(List,List,LengthList, LengthList,1):-!.
@@ -29,16 +29,15 @@ read_list_str(Cur_list,List,CurLengthList,LengthList,0):- read_str(A,N,Flag),
     append(Cur_list,[A],C_l), append(CurLengthList, [N], NewLengthList),
         read_list_str(C_l,List,NewLengthList,LengthList,Flag).
 
-%Âûâîä ñïèñêà ñòðîê
+%Ð’Ñ‹Ð²Ð¾Ð´ ÑÐ¿Ð¸ÑÐºÐ° ÑÑ‚Ñ€Ð¾Ðº
 write_list_str([]):-!.
 write_list_str([H|T]):- write_str(H),nl,write_list_str(T).
 
-%×òåíèå èç ôàéëà è çàïèñü â ôàéë
+%Ð§Ñ‚ÐµÐ½Ð¸Ðµ Ð¸Ð· Ñ„Ð°Ð¹Ð»Ð° Ð¸ Ð·Ð°Ð¿Ð¸ÑÑŒ Ð² Ñ„Ð°Ð¹Ð»
 files:-	see('x:/Stroki_read.txt'),read_list_str(List),seen,
             tell('x:/Stroki_write.txt'), write_list_str(List),told.
 
-%Task 1.1 Äàí ôàéë. Ïðî÷èòàòü èç ôàéëà ñòðîêè è âûâåñòè äëèíó íàèáîëüøåé
-%ñòðîêè.
+%Task 1.1 Ð”Ð°Ð½ Ñ„Ð°Ð¹Ð». ÐŸÑ€Ð¾Ñ‡Ð¸Ñ‚Ð°Ñ‚ÑŒ Ð¸Ð· Ñ„Ð°Ð¹Ð»Ð° ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð¸ Ð²Ñ‹Ð²ÐµÑÑ‚Ð¸ Ð´Ð»Ð¸Ð½Ñƒ Ð½Ð°Ð¸Ð±Ð¾Ð»ÑŒÑˆÐµÐ¹ ÑÑ‚Ñ€Ð¾ÐºÐ¸.
 maxLength:- see('x:/Stroki_read.txt'), read_list_str(_, LengthList), seen,
     max(LengthList, Max), write(Max).
 
@@ -47,8 +46,7 @@ max([],CurMax, CurMax):- !.
 max([H|T], CurMax, X):- H > CurMax, NewMax is H, max(T,NewMax,X), !.
 max([_|T], CurMax, X):- max(T, CurMax, X).
 
-%Task 1.2 Äàí ôàéë. Îïðåäåëèòü, ñêîëüêî â ôàéëå ñòðîê, íå ñîäåðæàùèõ
-%ïðîáåëû.
+%Task 1.2 Ð”Ð°Ð½ Ñ„Ð°Ð¹Ð». ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»Ð¸Ñ‚ÑŒ, ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð² Ñ„Ð°Ð¹Ð»Ðµ ÑÑ‚Ñ€Ð¾Ðº, Ð½Ðµ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‰Ð¸Ñ… Ð¿Ñ€Ð¾Ð±ÐµÐ»Ñ‹.
 without_space :- see('x:/Stroki_read.txt'), read_list_str(List),seen,
     w_space(List,0,N), write(N).
 
@@ -58,21 +56,21 @@ w_space([H|T],N,R):- w_space(H,F), (F = 0 -> w_space(T,N,R) ; (N1 is N + 1,
 w_space([],1):-!.
 w_space([H|T],N):- (H = 32 -> (N is 0, !) ; w_space(T,N)).
 
-%Task 1.3 Äàí ôàéë, íàéòè è âûâåñòè íà ýêðàí òîëüêî òå ñòðîêè, â êîòîðûõ áóêâ
-%À áîëüøå, ÷åì â ñðåäíåì íà ñòðîêó.
+%%Task 1.3 Ð”Ð°Ð½ Ñ„Ð°Ð¹Ð», Ð½Ð°Ð¹Ñ‚Ð¸ Ð¸ Ð²Ñ‹Ð²ÐµÑÑ‚Ð¸ Ð½Ð° ÑÐºÑ€Ð°Ð½ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ‚Ðµ ÑÑ‚Ñ€Ð¾ÐºÐ¸, Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… Ð±ÑƒÐºÐ²
+%Ð Ð±Ð¾Ð»ÑŒÑˆÐµ, Ñ‡ÐµÐ¼ Ð² ÑÑ€ÐµÐ´Ð½ÐµÐ¼ Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÑƒ.
 a_letter :- see('x:/Stroki_read.txt'), read_list_str(List), seen,
     count_string(List,0,C), count_a(List,0,A), Average is A / C,
     more_a(List,Average).
 
-%Ïîäñ÷¸ò ÷èñëà ñòðîê â ôàéëå
+%ÐŸÐ¾Ð´ÑÑ‡Ñ‘Ñ‚ Ñ‡Ð¸ÑÐ»Ð° ÑÑ‚Ñ€Ð¾Ðº Ð² Ñ„Ð°Ð¹Ð»Ðµ
 count_string([],C,C):-!.
 count_string([_|T],C,R):- C1 is C + 1, count_string(T,C1,R).
 
-%Ïîäñ÷¸ò áóêâ À â ôàéëå
+%ÐŸÐ¾Ð´ÑÑ‡Ñ‘Ñ‚ Ð±ÑƒÐºÐ² Ð Ð² Ñ„Ð°Ð¹Ð»Ðµ
 count_a([],A,A):-!.
 count_a([H|T],A,C):- count_Astr(H,0,Astr), A1 is A + Astr, count_a(T,A1,C).
 
-%Ïîäñ÷¸ò áóêâ À â ñòðîêå
+%ÐŸÐ¾Ð´ÑÑ‡Ñ‘Ñ‚ Ð±ÑƒÐºÐ² Ð Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ
 count_Astr([],Astr,Astr):-!.
 count_Astr([H|T],A,Astr):- (H = 65 -> (A1 is A + 1, count_Astr(T,A1,Astr)) ;
                            count_Astr(T,A,Astr)).
@@ -80,18 +78,18 @@ count_Astr([H|T],A,Astr):- (H = 65 -> (A1 is A + 1, count_Astr(T,A1,Astr)) ;
 more_a([],_):-!.
 more_a([H|T],Av):- count_Astr(H,0,A), (A > Av -> (write_str(H), nl, more_a(T,Av));       more_a(T,Av)).
 
-%Task 1.4 Äàí ôàéë, âûâåñòè ñàìîå ÷àñòîå ñëîâî.
+%Task 1.4 Ð”Ð°Ð½ Ñ„Ð°Ð¹Ð», Ð²Ñ‹Ð²ÐµÑÑ‚Ð¸ ÑÐ°Ð¼Ð¾Ðµ Ñ‡Ð°ÑÑ‚Ð¾Ðµ ÑÐ»Ð¾Ð²Ð¾.
 frequent :- see('x:/Stroki_read.txt'),read_list_str(List), seen,
    all_words(List,[],List_words), unique_elems(List_words,Unique_words),
      counts(Unique_words,C,List_words),	indOfMax(C,Ind),
        el_by_number(Unique_words,Ind,Word),name(Word1,Word), write(Word1).
 
-%Ôîðìèðîâàíèå ñïèñîê âñåõ ñëîâ ôàéëà
+%Ð¤Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÐ¿Ð¸ÑÐ¾Ðº Ð²ÑÐµÑ… ÑÐ»Ð¾Ð² Ñ„Ð°Ð¹Ð»Ð°
 all_words([],List_words,List_words):-!.
 all_words([H|T],I,List_words):- get_words(H,Words),
 	append(I,Words,I1), all_words(T,I1,List_words).
 
-%Ïîëó÷åíèå ñïèñêà ñëîâ â ñòðîêå
+%ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ ÑÐ¿Ð¸ÑÐºÐ° ÑÐ»Ð¾Ð² Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ
 get_words(A,Words):- get_words(A,[],Words).
 get_words([],List_words,List_words):-!.
 get_words(Str,Words,List_words):- skip_space(Str,New_Str),
@@ -104,20 +102,20 @@ counts([],[],_):-!.
 counts([Word|T_words],[Count|T_counts],Words):-
 	count(Word,Words,Count),counts(T_words,T_counts,Words).
 
-%Ñêîëüêî ðàç ýëåìåíò âñòðå÷àëñÿ â ñïèñêå count(+Elem, +List, -K)
+%Ð¡ÐºÐ¾Ð»ÑŒÐºÐ¾ Ñ€Ð°Ð· ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð²ÑÑ‚Ñ€ÐµÑ‡Ð°Ð»ÑÑ Ð² ÑÐ¿Ð¸ÑÐºÐµ count(+Elem, +List, -K)
 count(_,[],0):-!.
 count(Elem,List,X):- count(Elem,List,0,X).
 count(_,[],Count,Count):- !.
 count(Elem,[Elem|T],Count,X):- Count1 is Count + 1, count(Elem,T,Count1,X), !.
 count(Elem,[_|T],Count,X):- count(Elem,T,Count,X).
 
-%Âûâîä ýëåìåíòà íà äàííîé ïîçèöèè el_by_number(+List, +Number, -Elem)
+%Ð’Ñ‹Ð²Ð¾Ð´ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° Ð½Ð° Ð´Ð°Ð½Ð½Ð¾Ð¹ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¸ el_by_number(+List, +Number, -Elem)
 el_by_number(A,Ind,El):-el_by_number(A,0,Ind,El).
 el_by_number([],_,_,nil):-!.
 el_by_number([El|_],Ind,Ind,El):-!.
 el_by_number([_|T],I,Ind,El):-I1 is I+1,el_by_number(T,I1,Ind,El).
 
-%Cïèñîê áåç ïîâòîðîâ unique_elems(+List, -Result)
+%CÐ¿Ð¸ÑÐ¾Ðº Ð±ÐµÐ· Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€Ð¾Ð² unique_elems(+List, -Result)
 unique_elems([], []):- !.
 unique_elems([H|T], List2):- unique_elems([H|T], List2, []).
 unique_elems([], CurList, CurList):- !.
@@ -127,12 +125,12 @@ unique_elems([H|T], List, CurList):-
 	unique_elems(T, List, NewList), !.
 unique_elems([_|T], List, CurList):- unique_elems(T, List, CurList).
 
-%Ïðîâåðêà, åñòü ëè â ñïèñêå äàííûé ýëåìåíò
+%ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ°, ÐµÑÑ‚ÑŒ Ð»Ð¸ Ð² ÑÐ¿Ð¸ÑÐºÐµ Ð´Ð°Ð½Ð½Ñ‹Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚
 contains([], _):- !, fail.
 contains([H|_], H):- !.
 contains([_|T], N):- contains(T, N).
 
-%Íîìåð ìàêñèìàëüíîãî ýëåìåíòà ñïèñêà
+%ÐÐ¾Ð¼ÐµÑ€ Ð¼Ð°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° ÑÐ¿Ð¸ÑÐºÐ°
 indOfMax(X,Y):-indexOfMin(X,Y).
 indexOfMin([], -1):- !.
 indexOfMin([H|T], X):-indexOfMin(T, 0, 1, X, H).
@@ -143,11 +141,11 @@ indexOfMin([H|T], CurInd, _, X, CurMin):-
 indexOfMin([_|T], CurInd, MinInd, X, CurMin):-
 	NewCurInd is CurInd + 1, indexOfMin(T, NewCurInd, MinInd, X, CurMin).
 
-%Ïðîïóñê ïðîáåëà
+%ÐŸÑ€Ð¾Ð¿ÑƒÑÐº Ð¿Ñ€Ð¾Ð±ÐµÐ»Ð°
 skip_space([32|Tail],New_Str):- skip_space(Tail,New_Str),!.
 skip_space(New_Str,New_Str).
 
-%Âûâîä ïåðâîãî ñëîâà è îñòàëüíîé ñòðîêè get_word(+List, -Word, -List1)
+%Ð’Ñ‹Ð²Ð¾Ð´ Ð¿ÐµÑ€Ð²Ð¾Ð³Ð¾ ÑÐ»Ð¾Ð²Ð° Ð¸ Ð¾ÑÑ‚Ð°Ð»ÑŒÐ½Ð¾Ð¹ ÑÑ‚Ñ€Ð¾ÐºÐ¸ get_word(+List, -Word, -List1)
 get_word([],[],[]):-!.
 get_word(Str,Word,New_Str_after_word):-get_word(Str,[],Word,New_Str_after_word).
 
@@ -156,37 +154,37 @@ get_word([32|T],Word,Word,T):-!.
 get_word([H|T],W,Word,New_Str_after_word):- append(W,[H],W1),
 	get_word(T,W1,Word,New_Str_after_word).
 
-%Task 1.5 Äàí ôàéë, âûâåñòè â îòäåëüíûé ôàéë ñòðîêè, ñîñòîÿùèå èç ñëîâ, íå
-%ïîâòîðÿþùèõñÿ â èñõîäíîì ôàéëå.
+%Task 1.5 Ð”Ð°Ð½ Ñ„Ð°Ð¹Ð», Ð²Ñ‹Ð²ÐµÑÑ‚Ð¸ Ð² Ð¾Ñ‚Ð´ÐµÐ»ÑŒÐ½Ñ‹Ð¹ Ñ„Ð°Ð¹Ð» ÑÑ‚Ñ€Ð¾ÐºÐ¸, ÑÐ¾ÑÑ‚Ð¾ÑÑ‰Ð¸Ðµ Ð¸Ð· ÑÐ»Ð¾Ð², Ð½Ðµ
+%Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€ÑÑŽÑ‰Ð¸Ñ…ÑÑ Ð² Ð¸ÑÑ…Ð¾Ð´Ð½Ð¾Ð¼ Ñ„Ð°Ð¹Ð»Ðµ.
 unique_strings :- see('x:/Stroki_read.txt'),read_list_str(List), seen,
      all_words(List,[],All_words), unique_w(All_words,Unique_words),
 	tell('x:/Stroki_write.txt'), unique_str(List,Unique_words),told.
 
-%Âûâîä ñòðîêè ñ íåïîâòîðÿþùèìèñÿ ñëîâàìè
+%Ð’Ñ‹Ð²Ð¾Ð´ ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ñ Ð½ÐµÐ¿Ð¾Ð²Ñ‚Ð¾Ñ€ÑÑŽÑ‰Ð¸Ð¼Ð¸ÑÑ ÑÐ»Ð¾Ð²Ð°Ð¼Ð¸
 unique_str([],_):-!.
 unique_str([H|T],Unique_words):- get_words(H,Words_H),
 	 (   check_str(Words_H,Unique_words) -> (write_str(H), nl,
 	     unique_str(T,Unique_words)) ; unique_str(T,Unique_words)).
 
-%Ïðîâåðêà, âñå ëè ñëîâà ñòðîêè ÿâëÿþòñÿ óíèêàëüíûìè
+%ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ°, Ð²ÑÐµ Ð»Ð¸ ÑÐ»Ð¾Ð²Ð° ÑÑ‚Ñ€Ð¾ÐºÐ¸ ÑÐ²Ð»ÑÑŽÑ‚ÑÑ ÑƒÐ½Ð¸ÐºÐ°Ð»ÑŒÐ½Ñ‹Ð¼Ð¸
 check_str([],_):-!.
 check_str([H|T],Unique_words):- in_list(Unique_words,H),check_str(T,Unique_words).
 
 in_list([El|_],El):-!.
 in_list([_|T],El):- in_list(T,El).
 
-%Óäàëåíèå ýëåìåíòà èç ñïèñêà
+%Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° Ð¸Ð· ÑÐ¿Ð¸ÑÐºÐ°
 del_elem(_,[],[]):-!.
 del_elem(H,[H|T],R) :- del_elem(H,T,R),!.
 del_elem(H,[H1|T],[H1|R]) :- H \= H1, del_elem(H,T,R).
 
-%Ôîðìèðîâàíèå ñïèñêà íåïîâòîðÿþùèõñÿ ýëåìåíòîâ
+%Ð¤Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÐ¿Ð¸ÑÐºÐ° Ð½ÐµÐ¿Ð¾Ð²Ñ‚Ð¾Ñ€ÑÑŽÑ‰Ð¸Ñ…ÑÑ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð²
 unique_w([],[]):-!.
 unique_w([H|T],[H|R]) :- not(in_list(T,H)), unique_w(T,R),!.
 unique_w([H|T],R) :- del_elem(H,T,H1), unique_w(H1,R).
 
-%Task 2.5  Äàíà ñòðîêà. Íåîáõîäèìî ïåðåìåøàòü âñå ñèìâîëû ñòðîêè â ñëó÷àéíîì
-%ïîðÿäêå.
+%Task 2.5  Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°. ÐÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð¿ÐµÑ€ÐµÐ¼ÐµÑˆÐ°Ñ‚ÑŒ Ð²ÑÐµ ÑÐ¸Ð¼Ð²Ð¾Ð»Ñ‹ ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð² ÑÐ»ÑƒÑ‡Ð°Ð¹Ð½Ð¾Ð¼
+%Ð¿Ð¾Ñ€ÑÐ´ÐºÐµ.
 mix_symbols:- see('x:/Stroki_read.txt'), read_str(Str,Length), seen,
 	mix(Str,Length,[],Mix_str),write_str(Mix_str).
 
@@ -200,47 +198,47 @@ delete_from_str([H|T],H,Rstr,0):- delete_from_str(T,H,Rstr,1),!.
 delete_from_str([H1|T],H,[H1|Rstr],0):- H \= H1, delete_from_str(T,H,Rstr,0),!.
 delete_from_str([H1|T],H,[H1|Rstr],1):- delete_from_str(T,H,Rstr,1),!.
 
-%Task 2.7  Äàíà ñòðîêà, ñîñòîÿùàÿ èç ñèìâîëîâ ëàòèíèöû. Íåîáõîäèìî ïðîâåðèòü,
-%îáðàçóþò ëè ïðîïèñíûå ñèìâîëû ýòîé ñòðîêè ïàëèíäðîì (çåðêàëüíîå ñëîâî)
+%Task 2.7  Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°, ÑÐ¾ÑÑ‚Ð¾ÑÑ‰Ð°Ñ Ð¸Ð· ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð² Ð»Ð°Ñ‚Ð¸Ð½Ð¸Ñ†Ñ‹. ÐÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð¿Ñ€Ð¾Ð²ÐµÑ€Ð¸Ñ‚ÑŒ,
+%Ð¾Ð±Ñ€Ð°Ð·ÑƒÑŽÑ‚ Ð»Ð¸ Ð¿Ñ€Ð¾Ð¿Ð¸ÑÐ½Ñ‹Ðµ ÑÐ¸Ð¼Ð²Ð¾Ð»Ñ‹ ÑÑ‚Ð¾Ð¹ ÑÑ‚Ñ€Ð¾ÐºÐ¸ Ð¿Ð°Ð»Ð¸Ð½Ð´Ñ€Ð¾Ð¼ (Ð·ÐµÑ€ÐºÐ°Ð»ÑŒÐ½Ð¾Ðµ ÑÐ»Ð¾Ð²Ð¾)
 palindrom:- see('x:/Stroki_read.txt'), read_str(Str,_), seen,
 	big_letters(Str,List), reverse_list(Str,Rstr), p(List,Rstr).
 
-%Ôîðìèðîâàíèå ñïèñêà ïðîïèñíûõ ñèìâîëîâ
+%Ð¤Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÐ¿Ð¸ÑÐºÐ° Ð¿Ñ€Ð¾Ð¿Ð¸ÑÐ½Ñ‹Ñ… ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð²
 big_letters([],[]):-!.
 big_letters([H|T],[H|List]):- H > 64, H < 91, big_letters(T,List),!.
 big_letters([_|T],List):- big_letters(T,List),!.
 
-%Ïðîâåðêà, ñîäåðæèò ëè ñïèñîê äàííûé ïîäñïèñîê; p(+Sublist,+List)
+%ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ°, ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ñ‚ Ð»Ð¸ ÑÐ¿Ð¸ÑÐ¾Ðº Ð´Ð°Ð½Ð½Ñ‹Ð¹ Ð¿Ð¾Ð´ÑÐ¿Ð¸ÑÐ¾Ðº; p(+Sublist,+List)
 p([],_):-!.
 p([SubH|SubT],[H|T]):- H = SubH -> p(SubT,T) ; p([SubH|SubT],T).
 
-%Ïåðåâîðîò ñïèñêà; reverse_list(+List, -Revl)
+%ÐŸÐµÑ€ÐµÐ²Ð¾Ñ€Ð¾Ñ‚ ÑÐ¿Ð¸ÑÐºÐ°; reverse_list(+List, -Revl)
 reverse_list(List,Revl):- reverse_list(List,[],Revl).
 reverse_list([],Revl,Revl):-!.
 reverse_list([H|T],T1,Revl):- reverse_list(T,[H|T1],Revl).
 
-%Task 2.14 Äàíà ñòðîêà â êîòîðîé çàïèñàíû ñëîâà ÷åðåç ïðîáåë. Íåîáõîäèìî
-%óïîðÿäî÷èòü ñëîâà ïî êîëè÷åñòâó áóêâ â êàæäîì ñëîâå.
+%Task 2.14 Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ° Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹ Ð·Ð°Ð¿Ð¸ÑÐ°Ð½Ñ‹ ÑÐ»Ð¾Ð²Ð° Ñ‡ÐµÑ€ÐµÐ· Ð¿Ñ€Ð¾Ð±ÐµÐ». ÐÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾
+%ÑƒÐ¿Ð¾Ñ€ÑÐ´Ð¾Ñ‡Ð¸Ñ‚ÑŒ ÑÐ»Ð¾Ð²Ð° Ð¿Ð¾ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ñƒ Ð±ÑƒÐºÐ² Ð² ÐºÐ°Ð¶Ð´Ð¾Ð¼ ÑÐ»Ð¾Ð²Ðµ.
 sort_words:- see('x:/Stroki_read.txt'), read_list_str_mod(Words,Lengths), seen,
 	sorting(Words,Lengths,[],Sort_list), write_list_str_mod(Sort_list).
 
-% Íàõîäèì íîìåð ìåíüøåé äëèíû, íàõîäèì ìåíüøóþ äëèíó, óäàëÿåì èç ñïèñêà
-% äëèí, ïî íîìåðó ìåíüøåé äëèíû íàõîäèì ñëîâî, êèäàåì â ðåçóëüòèðóþùèé
-% ñïèñîê, äîáàâëÿåì ïðîáåë
+% ÐÐ°Ñ…Ð¾Ð´Ð¸Ð¼ Ð½Ð¾Ð¼ÐµÑ€ Ð¼ÐµÐ½ÑŒÑˆÐµÐ¹ Ð´Ð»Ð¸Ð½Ñ‹, Ð½Ð°Ñ…Ð¾Ð´Ð¸Ð¼ Ð¼ÐµÐ½ÑŒÑˆÑƒÑŽ Ð´Ð»Ð¸Ð½Ñƒ, ÑƒÐ´Ð°Ð»ÑÐµÐ¼ Ð¸Ð· ÑÐ¿Ð¸ÑÐºÐ°
+% Ð´Ð»Ð¸Ð½, Ð¿Ð¾ Ð½Ð¾Ð¼ÐµÑ€Ñƒ Ð¼ÐµÐ½ÑŒÑˆÐµÐ¹ Ð´Ð»Ð¸Ð½Ñ‹ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ð¼ ÑÐ»Ð¾Ð²Ð¾, ÐºÐ¸Ð´Ð°ÐµÐ¼ Ð² Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ð¹
+% ÑÐ¿Ð¸ÑÐ¾Ðº, Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼ Ð¿Ñ€Ð¾Ð±ÐµÐ»
 sorting([],[],Sort_list,Sort_list):-!.
 sorting(Words,Lengths,List,R):- numOfMin(Lengths,Num),
 	el_by_number(Lengths,Num,El), del_elem(El,Lengths,Rlength),
 	 el_by_number(Words,Num,Word), append(List,[Word],Rlist),
 	  del_elem(Word,Words,Rwords), sorting(Rwords,Rlength,Rlist,R).
 
-%Ââîä ñëîâà
+%Ð’Ð²Ð¾Ð´ ÑÐ»Ð¾Ð²Ð°
 read_str_mod(A,N,Flag):- get0(X),r_str_mod(X,A,[],N,0,Flag).
 r_str_mod(-1,A,A,N,N,1):-!.
 r_str_mod(32,A,A,N,N,0):-!.
 r_str_mod(X,A,B,N,K,Flag):-K1 is K+1,append(B,[X],B1),get0(X1),
     r_str_mod(X1,A,B1,N,K1,Flag).
 
-%Ââîä ñïèñêà ñëîâ è ñïèñêà äëèí ñëîâ
+%Ð’Ð²Ð¾Ð´ ÑÐ¿Ð¸ÑÐºÐ° ÑÐ»Ð¾Ð² Ð¸ ÑÐ¿Ð¸ÑÐºÐ° Ð´Ð»Ð¸Ð½ ÑÐ»Ð¾Ð²
 read_list_str_mod(List, LengthList):- read_str_mod(A,N,Flag),
     read_list_str_mod([A],List,[N],LengthList,Flag).
 read_list_str_mod(List,List,LengthList, LengthList,1):-!.
@@ -249,7 +247,7 @@ read_list_str_mod(Cur_list,List,CurLengthList,LengthList,0):-
        append(CurLengthList, [N], NewLengthList),
         read_list_str_mod(C_l,List,NewLengthList,LengthList,Flag).
 
-%Íîìåð ìèíèìàëüíîãî ýëåìåíòà ñïèñêà
+%ÐÐ¾Ð¼ÐµÑ€ Ð¼Ð¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° ÑÐ¿Ð¸ÑÐºÐ°
 numOfMin([], -1):- !.
 numOfMin([H|T], X):-numOfMin(T, 0, 0, X, H).
 numOfMin([], _, MinInd, MinInd, _):-!.
@@ -259,16 +257,16 @@ numOfMin([H|T], CurInd, _, X, CurMin):-
 numOfMin([_|T], CurInd, MinInd, X, CurMin):-
 	NewCurInd is CurInd + 1, numOfMin(T, NewCurInd, MinInd, X, CurMin).
 
-%Âûâîä ñëîâ
+%Ð’Ñ‹Ð²Ð¾Ð´ ÑÐ»Ð¾Ð²
 write_list_str_mod([]):-!.
 write_list_str_mod([H|T]):- write_str_mod(H),put(32),write_list_str_mod(T).
 
-%Âûâîä ñëîâà
+%Ð’Ñ‹Ð²Ð¾Ð´ ÑÐ»Ð¾Ð²Ð°
 write_str_mod([]):-!.
 write_str_mod([H|T]):- put(H), write_str_mod(T).
 
-%Task 3 Äàíà ñòðîêà. Íåîáõîäèìî íàéòè âñå äàòû, êîòîðûå îïèñàíû â
-%âèäå "31 ôåâðàëÿ 2007"
+%Task 3 Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°. ÐÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð½Ð°Ð¹Ñ‚Ð¸ Ð²ÑÐµ Ð´Ð°Ñ‚Ñ‹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¾Ð¿Ð¸ÑÐ°Ð½Ñ‹ Ð²
+%Ð²Ð¸Ð´Ðµ "31 Ñ„ÐµÐ²Ñ€Ð°Ð»Ñ 2007"
 date:- see('x:/Stroki_read.txt'), read_str(A,_), seen, append(A,[32],A1),
 	date_time(A1).
 
@@ -281,29 +279,29 @@ date_time([H|T]):- (day([H|T],[],Day,Day_Left)->
       date_time(Year_Left); date_time(Month_Left)); date_time(Day_Left));
 	 date_time(T)).
 
-%Ïîèñê ÷èñëà äíÿ day(+Str,+I,-Day,-Day_Left)
+%ÐŸÐ¾Ð¸ÑÐº Ñ‡Ð¸ÑÐ»Ð° Ð´Ð½Ñ day(+Str,+I,-Day,-Day_Left)
 day([32|T],Day,Day,T):-!.
 day([H|T],I,Day,Day_Left):- H >=48, H =<57, append(I,[H],I1),
     day(T,I1,Day,Day_Left),!.
 day([_|_],_,_,_):-!,false.
 
-%Ïîèñê ìåñÿöà month(+Str,+I,-Month,-Month_Left)
+%ÐŸÐ¾Ð¸ÑÐº Ð¼ÐµÑÑÑ†Ð° month(+Str,+I,-Month,-Month_Left)
 month([32|T],Month,Month,T):-!.
 month([H|T],I,Month,Month_Left):- H >= 97, H =< 122, append(I,[H],I1),
     month(T,I1,Month,Month_Left),!.
 month([_|_],_,_,_):-!,false.
 
-%Ïîèñê ãîäà year(+Str,+I,-Year,-Year_Left)
+%ÐŸÐ¾Ð¸ÑÐº Ð³Ð¾Ð´Ð° year(+Str,+I,-Year,-Year_Left)
 year([32|T],Year,Year,T):-!.
 year([H|T],I,Year,Year_Left):- H >= 48,H =< 57,append(I,[H],I1),
     year(T,I1,Year,Year_Left),!.
 year([_|_],_,_,_):-!,false.
 
-%Task 4.5 Äàíà ñòðîêà. Íåîáõîäèìî íàéòè íàèáîëüøåå êîëè÷åñòâî èäóùèõ
-%ïîäðÿä ñèìâîëîâ êèðèëëèöû
+%%Task 4.5 Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°. ÐÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð½Ð°Ð¹Ñ‚Ð¸ Ð½Ð°Ð¸Ð±Ð¾Ð»ÑŒÑˆÐµÐµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð¸Ð´ÑƒÑ‰Ð¸Ñ…
+%Ð¿Ð¾Ð´Ñ€ÑÐ´ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð² ÐºÐ¸Ñ€Ð¸Ð»Ð»Ð¸Ñ†Ñ‹
 max_in_row :- see('x:/Stroki_read.txt'), read_str(A,_), seen, max_row(A).
 
-%Ïîèñê íàèáîëüøåãî êîëè÷åñòâà èäóùèõ ïîäðÿä ñèìâîëîâ êèðèëëèöû
+%ÐŸÐ¾Ð¸ÑÐº Ð½Ð°Ð¸Ð±Ð¾Ð»ÑŒÑˆÐµÐ³Ð¾ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð° Ð¸Ð´ÑƒÑ‰Ð¸Ñ… Ð¿Ð¾Ð´Ñ€ÑÐ´ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð² ÐºÐ¸Ñ€Ð¸Ð»Ð»Ð¸Ñ†Ñ‹
 max_row(A):- max_row(A,0,0),!.
 max_row([],Cur_max,Last_max):- (Cur_max > Last_max -> (write(Cur_max),!);
        (write(Last_max),!)).
@@ -312,8 +310,8 @@ max_row([H|T],Cur_max,Last_max):- (H > 64, H < 91);(H > 96, H < 123),
 max_row([_|T],Cur_max,Last_max):- (Cur_max > Last_max ->
 	 max_row(T,0,Cur_max); max_row(T,0,Last_max)),!.
 
-%Task 4.7 Äàíà ñòðîêà. Íåîáõîäèìî íàéòè ìèíèìàëüíîå èç èìåþùèõñÿ â íåé
-%íàòóðàëüíûõ ÷èñåë
+%Task 4.7 Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°. ÐÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð½Ð°Ð¹Ñ‚Ð¸ Ð¼Ð¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ðµ Ð¸Ð· Ð¸Ð¼ÐµÑŽÑ‰Ð¸Ñ…ÑÑ Ð² Ð½ÐµÐ¹
+%Ð½Ð°Ñ‚ÑƒÑ€Ð°Ð»ÑŒÐ½Ñ‹Ñ… Ñ‡Ð¸ÑÐµÐ»
 min_natural:- see('x:/Stroki_read.txt'), read_str(A,_), seen,
 	min_natural(A,58,Min), put(Min).
 
@@ -322,11 +320,11 @@ min_natural([H|T],Cur_min,Min):- H > 48, H < 58, H < Cur_min,
 	min_natural(T,H,Min),!.
 min_natural([_|T],Cur_min,Min):- min_natural(T,Cur_min,Min),!.
 
-%Task 4.14 Äàíà ñòðîêà. Íåîáõîäèìî íàéòè íàèáîëüøåå êîëè÷åñòâî èäóùèõ
-%ïîäðÿä öèôð
+%Task 4.14 Ð”Ð°Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ°. ÐÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ Ð½Ð°Ð¹Ñ‚Ð¸ Ð½Ð°Ð¸Ð±Ð¾Ð»ÑŒÑˆÐµÐµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð¸Ð´ÑƒÑ‰Ð¸Ñ…
+%Ð¿Ð¾Ð´Ñ€ÑÐ´ Ñ†Ð¸Ñ„Ñ€
 maxDigit_in_row :-see('x:/Stroki_read.txt'), read_str(A,_), seen, maxDigit_row(A).
 
-%Ïîèñê íàèáîëüøåãî êîëè÷åñòâà èäóùèõ ïîäðÿä öèôð
+%ÐŸÐ¾Ð¸ÑÐº Ð½Ð°Ð¸Ð±Ð¾Ð»ÑŒÑˆÐµÐ³Ð¾ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð° Ð¸Ð´ÑƒÑ‰Ð¸Ñ… Ð¿Ð¾Ð´Ñ€ÑÐ´ Ñ†Ð¸Ñ„Ñ€
 maxDigit_row(A):- maxDigit_row(A,0,0),!.
 maxDigit_row([],Cur_max,Last_max):- (Cur_max > Last_max -> (write(Cur_max),!);
        (write(Last_max),!)).
@@ -335,45 +333,45 @@ maxDigit_row([H|T],Cur_max,Last_max):- H > 47, H < 58, Cur_max1 is Cur_max + 1,
 maxDigit_row([_|T],Cur_max,Last_max):- (Cur_max > Last_max ->
 	 maxDigit_row(T,0,Cur_max); maxDigit_row(T,0,Last_max)),!.
 
-%Task 5 Ïðî÷èòàòü ñïèñîê ñòðîê èç ôàéëà. Óïîðÿäî÷èòü ïî äëèíå ñòðîêè
+%Task 5 ÐŸÑ€Ð¾Ñ‡Ð¸Ñ‚Ð°Ñ‚ÑŒ ÑÐ¿Ð¸ÑÐ¾Ðº ÑÑ‚Ñ€Ð¾Ðº Ð¸Ð· Ñ„Ð°Ð¹Ð»Ð°. Ð£Ð¿Ð¾Ñ€ÑÐ´Ð¾Ñ‡Ð¸Ñ‚ÑŒ Ð¿Ð¾ Ð´Ð»Ð¸Ð½Ðµ ÑÑ‚Ñ€Ð¾ÐºÐ¸
 sort_list_str:- see('x:/Stroki_read.txt'), read_list_str(List,LengthList),seen,
-%Ïðåäèêàò sorting(+List,+Lengths,+Sort,-Sort_list) èç çàäàíèÿ 2.14
+%ÐŸÑ€ÐµÐ´Ð¸ÐºÐ°Ñ‚ sorting(+List,+Lengths,+Sort,-Sort_list) Ð¸Ð· Ð·Ð°Ð´Ð°Ð½Ð¸Ñ 2.14
 	sorting(List,LengthList,[],Sort_list),write_list_str(Sort_list).
 
-%Task 6 Äàí ñïèñîê ñòðîê èç ôàéëà. Óïîðÿäî÷èòü ïî êîëè÷åñòâó ñëîâ â ñòðîêå
+%Task 6 Ð”Ð°Ð½ ÑÐ¿Ð¸ÑÐ¾Ðº ÑÑ‚Ñ€Ð¾Ðº Ð¸Ð· Ñ„Ð°Ð¹Ð»Ð°. Ð£Ð¿Ð¾Ñ€ÑÐ´Ð¾Ñ‡Ð¸Ñ‚ÑŒ Ð¿Ð¾ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ñƒ ÑÐ»Ð¾Ð² Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ
 sort_on_words:- see('x:/Stroki_read.txt'), read_list_str(List),seen,
 	words_list(List,[],Words_list), sorting(List,Words_list,[],Sort_list),
 	 write_list_str(Sort_list).
 
-%Ôîðìèðîâàíèå ñïèñêà ÷èñëà ñëîâ â ñòðîêàõ words_list(+List,+Words,-Words_list)
+%Ð¤Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÐ¿Ð¸ÑÐºÐ° Ñ‡Ð¸ÑÐ»Ð° ÑÐ»Ð¾Ð² Ð² ÑÑ‚Ñ€Ð¾ÐºÐ°Ñ… words_list(+List,+Words,-Words_list)
 words_list([],Words_list,Words_list):-!.
 words_list([H|T],Words,Words_list):- num_words(H,1,Num),
 	append(Words,[Num],Words1), words_list(T,Words1,Words_list).
 
-%Ïîäñ÷¸ò êîëè÷åñòâà ñëîâ â ñòðîêå
+%ÐŸÐ¾Ð´ÑÑ‡Ñ‘Ñ‚ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð° ÑÐ»Ð¾Ð² Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ
 num_words([],Num,Num):-!.
 num_words([32|T],I,Num):- I1 is I + 1, num_words(T,I1,Num),!.
 num_words([_|T],I,Num):- num_words(T,I,Num).
 
-%Task 7 Äàí ñïèñîê ñòðîê èç ôàéëà. Óïîðÿäî÷èòü ïî êîëè÷åñòâó ñëîâ
-%èäóùèõ ïîñëå ÷èñåë
+%Task 7 Ð”Ð°Ð½ ÑÐ¿Ð¸ÑÐ¾Ðº ÑÑ‚Ñ€Ð¾Ðº Ð¸Ð· Ñ„Ð°Ð¹Ð»Ð°. Ð£Ð¿Ð¾Ñ€ÑÐ´Ð¾Ñ‡Ð¸Ñ‚ÑŒ Ð¿Ð¾ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ñƒ ÑÐ»Ð¾Ð²
+%Ð¸Ð´ÑƒÑ‰Ð¸Ñ… Ð¿Ð¾ÑÐ»Ðµ Ñ‡Ð¸ÑÐµÐ»
 sort_words_after_digits:- see('x:/Stroki_read.txt'),read_list_str(List), seen,
       list_word_after_digit(List,[],List_Word),
         sorting(List,List_Word,[],Sort_list), write_list_str(Sort_list).
 
-%Ôîðìèðîâàíèå ñïèñêà ÷èñëà ñëîâ ïîñëå öèôð â ñòðîêå
+%Ð¤Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÐ¿Ð¸ÑÐºÐ° Ñ‡Ð¸ÑÐ»Ð° ÑÐ»Ð¾Ð² Ð¿Ð¾ÑÐ»Ðµ Ñ†Ð¸Ñ„Ñ€ Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ
 list_word_after_digit([],R,R):-!.
 list_word_after_digit([H|T],I,R):- get_words(H,Words),
     count_words_after_digit(Words,0,Count_Words),append(I,[Count_Words],I1),
       list_word_after_digit(T,I1,R).
 
-%Ïîäñ÷¸ò ÷èñëà ñëîâ ïîñëå öèôð â ñòðîêå
+%ÐŸÐ¾Ð´ÑÑ‡Ñ‘Ñ‚ Ñ‡Ð¸ÑÐ»Ð° ÑÐ»Ð¾Ð² Ð¿Ð¾ÑÐ»Ðµ Ñ†Ð¸Ñ„Ñ€ Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ
 count_words_after_digit([_],Count_Words,Count_Words):-!.
 count_words_after_digit([H|T],I,Count_Words):- kolvo_digit(H,0,Digits),
 	(Digits > 0 -> I1 is I+1, count_words_after_digit(T,I1,Count_Words);
 	   count_words_after_digit(T,I,Count_Words)).
 
-%Ïîäñ÷¸ò ÷èñëà öèôð â ñëîâå
+%ÐŸÐ¾Ð´ÑÑ‡Ñ‘Ñ‚ Ñ‡Ð¸ÑÐ»Ð° Ñ†Ð¸Ñ„Ñ€ Ð² ÑÐ»Ð¾Ð²Ðµ
 kolvo_digit([],Kolvo,Kolvo):-!.
 kolvo_digit([H|T],I,Kolvo):- (H >= 48, H =< 57) -> I1 is I+1,
 	kolvo_digit(T,I1,Kolvo); kolvo_digit(T,I,Kolvo).
